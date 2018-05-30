@@ -19,7 +19,15 @@
 */
 
 #include "Optimizer.h"
-
+#ifdef __APPLE__
+#include "Thirdparty/macOS/g2o/g2o/core/block_solver.h"
+#include "Thirdparty/macOS/g2o/g2o/core/optimization_algorithm_levenberg.h"
+#include "Thirdparty/macOS/g2o/g2o/solvers/linear_solver_eigen.h"
+#include "Thirdparty/macOS/g2o/g2o/types/types_six_dof_expmap.h"
+#include "Thirdparty/macOS/g2o/g2o/core/robust_kernel_impl.h"
+#include "Thirdparty/macOS/g2o/g2o/solvers/linear_solver_dense.h"
+#include "Thirdparty/macOS/g2o/g2o/types/types_seven_dof_expmap.h"
+#else
 #include "Thirdparty/win/g2o/g2o/core/block_solver.h"
 #include "Thirdparty/win/g2o/g2o/core/optimization_algorithm_levenberg.h"
 #include "Thirdparty/win/g2o/g2o/solvers/linear_solver_eigen.h"
@@ -27,7 +35,7 @@
 #include "Thirdparty/win/g2o/g2o/core/robust_kernel_impl.h"
 #include "Thirdparty/win/g2o/g2o/solvers/linear_solver_dense.h"
 #include "Thirdparty/win/g2o/g2o/types/types_seven_dof_expmap.h"
-
+#endif
 #include<Eigen/StdVector>
 
 #include "Converter.h"

@@ -19,17 +19,16 @@
 */
 
 #include "LoopClosing.h"
-
 #include "Sim3Solver.h"
-
 #include "Converter.h"
-
 #include "Optimizer.h"
-
 #include "ORBmatcher.h"
+#include "Log.h"
 
 #include<mutex>
 #include<thread>
+
+//#include<unistd.h>
 
 
 namespace ORB_SLAM2
@@ -58,30 +57,31 @@ void LoopClosing::Run()
 {
     mbFinished =false;
 
-    while(1)
-    {
+    while(1) {
         // Check if there are keyframes in the queue
-        if(CheckNewKeyFrames())
-        {
+        if(CheckNewKeyFrames()) {
+            auto t1 = chrono::steady_clock::now();
             // Detect loop candidates and check covisibility consistency
-            if(DetectLoop())
-            {
+            if(DetectLoop()) {
                // Compute similarity transformation [sR|t]
                // In the stereo/RGBD case s=1
-               if(ComputeSim3())
-               {
+               if(ComputeSim3()) {
                    // Perform loop fusion and pose graph optimization
                    CorrectLoop();
                }
             }
-        }       
+            auto t2 = chrono::steady_clock::now();
+            auto t = duration_cast<chrono::milliseconds>(t2 - t1).count();
+            Log::write(__FUNCTION__, "loop_closure_duration=", t);
+        }
 
         ResetIfRequested();
 
         if(CheckFinish())
             break;
 
-        usleep(5000);
+        //usleep(5000);
+		std::this_thread::sleep_for(std::chrono::milliseconds(5));
     }
 
     SetFinish();
@@ -399,9 +399,8 @@ bool LoopClosing::ComputeSim3()
 
 }
 
-void LoopClosing::CorrectLoop()
-{
-    cout << "Loop detected!" << endl;
+void LoopClosing::CorrectLoop() {
+    Log::write(__FUNCTION__, "Loop detected!");
 
     // Send a stop signal to Local Mapping
     // Avoid new keyframes are inserted while correcting the loop
@@ -425,7 +424,8 @@ void LoopClosing::CorrectLoop()
     // Wait until Local Mapping has effectively stopped
     while(!mpLocalMapper->isStopped())
     {
-        usleep(1000);
+        //usleep(1000);
+		std::this_thread::sleep_for(std::chrono::milliseconds(1));
     }
 
     // Ensure current keyframe is updated
@@ -627,7 +627,8 @@ void LoopClosing::RequestReset()
         if(!mbResetRequested)
             break;
         }
-        usleep(5000);
+        //usleep(5000);
+		std::this_thread::sleep_for(std::chrono::milliseconds(5));
     }
 }
 
@@ -642,9 +643,8 @@ void LoopClosing::ResetIfRequested()
     }
 }
 
-void LoopClosing::RunGlobalBundleAdjustment(unsigned long nLoopKF)
-{
-    cout << "Starting Global Bundle Adjustment" << endl;
+void LoopClosing::RunGlobalBundleAdjustment(unsigned long nLoopKF) {
+    Log::write(__FUNCTION__, "Starting Global Bundle Adjustment");
 
     int idx =  mnFullBAIdx;
     Optimizer::GlobalBundleAdjustemnt(mpMap,10,&mbStopGBA,nLoopKF,false);
@@ -658,16 +658,15 @@ void LoopClosing::RunGlobalBundleAdjustment(unsigned long nLoopKF)
         if(idx!=mnFullBAIdx)
             return;
 
-        if(!mbStopGBA)
-        {
-            cout << "Global Bundle Adjustment finished" << endl;
-            cout << "Updating map ..." << endl;
+        if (!mbStopGBA) {
+            Log::write(__FUNCTION__, "Global Bundle Adjustment finished.", "Updating map ...");
             mpLocalMapper->RequestStop();
             // Wait until Local Mapping has effectively stopped
 
             while(!mpLocalMapper->isStopped() && !mpLocalMapper->isFinished())
             {
-                usleep(1000);
+                //usleep(1000);
+				std::this_thread::sleep_for(std::chrono::milliseconds(1));
             }
 
             // Get Map Mutex
@@ -740,7 +739,7 @@ void LoopClosing::RunGlobalBundleAdjustment(unsigned long nLoopKF)
 
             mpLocalMapper->Release();
 
-            cout << "Map updated!" << endl;
+            Log::write(__FUNCTION__, "Map updated!");
         }
 
         mbFinishedGBA = true;

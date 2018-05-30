@@ -24,8 +24,23 @@
 #include<opencv2/core/core.hpp>
 
 #include<Eigen/Dense>
-#include"Thirdparty/win/g2o/g2o/types/types_six_dof_expmap.h"
-#include"Thirdparty/win/g2o/g2o/types/types_seven_dof_expmap.h"
+#ifdef __APPLE__
+#include "Thirdparty/macOS/DBoW2/DBoW2/BowVector.h"
+#include "Thirdparty/macOS/DBoW2/DBoW2/FeatureVector.h"
+#include"Thirdparty/macOS/g2o/g2o/types/types_six_dof_expmap.h"
+#include"Thirdparty/macOS/g2o/g2o/types/types_seven_dof_expmap.h"
+#elif _WIN32
+#include "Thirdparty/win/DBoW2/DBoW2/BowVector.h"
+#include "Thirdparty/win/DBoW2/DBoW2/FeatureVector.h"
+#include "Thirdparty/win/g2o/g2o/types/types_six_dof_expmap.h"
+#include "Thirdparty/win/g2o/g2o/types/types_seven_dof_expmap.h"
+#elif __linux__ 
+#include "Thirdparty/linux/DBoW2/DBoW2/BowVector.h"
+#include "Thirdparty/linux/DBoW2/DBoW2/FeatureVector.h"
+#include"Thirdparty/linux/g2o/g2o/types/types_six_dof_expmap.h"
+#include"Thirdparty/linux/g2o/g2o/types/types_seven_dof_expmap.h"
+
+#endif
 
 namespace ORB_SLAM2
 {
@@ -50,6 +65,7 @@ public:
     static Eigen::Matrix<double,3,3> toMatrix3d(const cv::Mat &cvMat3);
 
     static std::vector<float> toQuaternion(const cv::Mat &M);
+    static std::vector<float> toPosition(const cv::Mat &position);
 };
 
 }// namespace ORB_SLAM

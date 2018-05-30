@@ -22,7 +22,6 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
 
-
 #include<string>
 #include<thread>
 #include<opencv2/core/core.hpp>
@@ -63,10 +62,11 @@ public:
     };
 
 public:
-
+	
+	
     // Initialize the SLAM system. It launches the Local Mapping, Loop Closing and Viewer threads.
     System(const string &strVocFile, const string &strSettingsFile, const eSensor sensor, const bool bUseViewer = true);
-
+	double GetFps();
     // Proccess the given stereo frame. Images must be synchronized and rectified.
     // Input images: RGB (CV_8UC3) or grayscale (CV_8U). RGB is converted to grayscale.
     // Returns the camera pose (empty if tracking fails).
@@ -81,7 +81,12 @@ public:
     // Proccess the given monocular frame
     // Input images: RGB (CV_8UC3) or grayscale (CV_8U). RGB is converted to grayscale.
     // Returns the camera pose (empty if tracking fails).
-    cv::Mat TrackMonocular(const cv::Mat &im, const double &timestamp);
+    cv::Mat TrackMonocular(const cv::Mat &im, const double &timestamp, double frames_per_second);
+
+    // Runs the viewer and enters the main event loop. This method should hence only be called once the main processing
+    // has started in a separate thread. For maximum portability, this method should only be called from the main
+    // thread.
+    void RunViewer();
 
     // This stops local mapping thread (map building) and performs only camera tracking.
     void ActivateLocalizationMode();
@@ -117,6 +122,12 @@ public:
     // Call first Shutdown()
     // See format details at: http://www.cvlibs.net/datasets/kitti/eval_odometry.php
     void SaveTrajectoryKITTI(const string &filename);
+    
+    void SaveKeyFrameTrajectoryOBJ(const string &filename);
+    
+    void SaveKeyFrameTrajectoryCSV(const string &filename);
+    
+    void SaveMapOBJ(const string &filename);
 
     // TODO: Save/Load functions
     // SaveMap(const string &filename);
@@ -128,6 +139,9 @@ public:
     std::vector<MapPoint*> GetTrackedMapPoints();
     std::vector<cv::KeyPoint> GetTrackedKeyPointsUn();
 
+    bool LocalizationOnly() const;
+
+	double fps = 0.0;
 private:
 
     // Input sensor
@@ -159,12 +173,15 @@ private:
 
     FrameDrawer* mpFrameDrawer;
     MapDrawer* mpMapDrawer;
+    
+  //#  Datatransfer* mpDatatransfer;
 
     // System threads: Local Mapping, Loop Closing, Viewer.
     // The Tracking thread "lives" in the main execution thread that creates the System object.
     std::thread* mptLocalMapping;
     std::thread* mptLoopClosing;
     std::thread* mptViewer;
+    //# std::thread* mptDataTransfer;
 
     // Reset flag
     std::mutex mMutexReset;
@@ -174,6 +191,7 @@ private:
     std::mutex mMutexMode;
     bool mbActivateLocalizationMode;
     bool mbDeactivateLocalizationMode;
+    bool mbLocOnly;
 
     // Tracking state
     int mTrackingState;

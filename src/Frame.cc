@@ -21,11 +21,15 @@
 #include "Frame.h"
 #include "Converter.h"
 #include "ORBmatcher.h"
+#include "Log.h"
+#include "Settings.h"
 #include <thread>
 
 namespace ORB_SLAM2
 {
-
+int WIDTH = 0, HEIGHT = 0;
+bool filteringKeypoints = true;
+float filteringFactor = 0.0;
 long unsigned int Frame::nNextId=0;
 bool Frame::mbInitialComputations=true;
 float Frame::cx, Frame::cy, Frame::fx, Frame::fy, Frame::invfx, Frame::invfy;
@@ -49,6 +53,17 @@ Frame::Frame(const Frame &frame)
      mvScaleFactors(frame.mvScaleFactors), mvInvScaleFactors(frame.mvInvScaleFactors),
      mvLevelSigma2(frame.mvLevelSigma2), mvInvLevelSigma2(frame.mvInvLevelSigma2)
 {
+
+    // BOMMEL
+    cv::FileStorage fSettings(Settings::path, cv::FileStorage::READ);
+    //Load Keypoint parameters
+    filteringKeypoints =   (0.0   == static_cast<float>(fSettings["Keypoint.Offset.ON"]))       ? true    : false;
+    filteringFactor =      (0.0   == static_cast<float>(fSettings["Keypoint.Offset.Factor"]))   ? 0.0     : fSettings["Keypoint.Offset.Factor"];
+
+    WIDTH = frame.cx;
+    HEIGHT = frame.cy;
+    // BOMMEL ENDE
+
     for(int i=0;i<FRAME_GRID_COLS;i++)
         for(int j=0; j<FRAME_GRID_ROWS; j++)
             mGrid[i][j]=frame.mGrid[i][j];
@@ -62,6 +77,16 @@ Frame::Frame(const cv::Mat &imLeft, const cv::Mat &imRight, const double &timeSt
     :mpORBvocabulary(voc),mpORBextractorLeft(extractorLeft),mpORBextractorRight(extractorRight), mTimeStamp(timeStamp), mK(K.clone()),mDistCoef(distCoef.clone()), mbf(bf), mThDepth(thDepth),
      mpReferenceKF(static_cast<KeyFrame*>(NULL))
 {
+    // BOMMEL
+    cv::FileStorage fSettings(Settings::path, cv::FileStorage::READ);
+    //Load Keypoint parameters
+    filteringKeypoints =   (0.0   == static_cast<float>(fSettings["Keypoint.Offset.ON"]))       ? true    : false;
+    filteringFactor =      (0.0   == static_cast<float>(fSettings["Keypoint.Offset.Factor"]))   ? 0.0     : fSettings["Keypoint.Offset.Factor"];
+
+    WIDTH = imLeft.cols;
+    HEIGHT = imLeft.rows;
+    // BOMMEL ENDE
+
     // Frame ID
     mnId=nNextId++;
 
@@ -120,6 +145,16 @@ Frame::Frame(const cv::Mat &imGray, const cv::Mat &imDepth, const double &timeSt
     :mpORBvocabulary(voc),mpORBextractorLeft(extractor),mpORBextractorRight(static_cast<ORBextractor*>(NULL)),
      mTimeStamp(timeStamp), mK(K.clone()),mDistCoef(distCoef.clone()), mbf(bf), mThDepth(thDepth)
 {
+    // BOMMEL
+    cv::FileStorage fSettings(Settings::path, cv::FileStorage::READ);
+    //Load Keypoint parameters
+    filteringKeypoints =   (0.0   == static_cast<float>(fSettings["Keypoint.Offset.ON"]))       ? true    : false;
+    filteringFactor =      (0.0   == static_cast<float>(fSettings["Keypoint.Offset.Factor"]))   ? 0.0     : fSettings["Keypoint.Offset.Factor"];
+
+    WIDTH = imGray.cols;
+    HEIGHT = imGray.rows;
+    // BOMMEL ENDE
+
     // Frame ID
     mnId=nNextId++;
 
@@ -175,6 +210,16 @@ Frame::Frame(const cv::Mat &imGray, const double &timeStamp, ORBextractor* extra
     :mpORBvocabulary(voc),mpORBextractorLeft(extractor),mpORBextractorRight(static_cast<ORBextractor*>(NULL)),
      mTimeStamp(timeStamp), mK(K.clone()),mDistCoef(distCoef.clone()), mbf(bf), mThDepth(thDepth)
 {
+    // BOMMEL
+    cv::FileStorage fSettings(Settings::path, cv::FileStorage::READ);
+    //Load Keypoint parameters
+    filteringKeypoints =   (0.0   == static_cast<float>(fSettings["Keypoint.Offset.ON"]))       ? true    : false;
+    filteringFactor =      (0.0   == static_cast<float>(fSettings["Keypoint.Offset.Factor"]))   ? 0.0     : fSettings["Keypoint.Offset.Factor"];
+
+    WIDTH = imGray.cols;
+    HEIGHT = imGray.rows;
+    // BOMMEL ENDE
+
     // Frame ID
     mnId=nNextId++;
 
@@ -191,6 +236,7 @@ Frame::Frame(const cv::Mat &imGray, const double &timeStamp, ORBextractor* extra
     ExtractORB(0,imGray);
 
     N = mvKeys.size();
+    Log::write(__FUNCTION__, "features=", N);
 
     if(mvKeys.empty())
         return;
@@ -403,6 +449,30 @@ void Frame::ComputeBoW()
 
 void Frame::UndistortKeyPoints()
 {
+    // Filtering Keypoints Bommel
+    int j=0;
+    int offsetX = WIDTH*filteringFactor, offsetY = HEIGHT*filteringFactor;
+    std::vector<cv::KeyPoint> mvKeystmp;
+    mvKeystmp.resize(N);
+    if (filteringKeypoints)
+    {
+        for(int i=0; i<N; i++) {
+            mvKeys[i].pt.x;
+            if ((mvKeys[i].pt.x > offsetX && mvKeys[i].pt.x < (WIDTH - offsetX)) && (mvKeys[i].pt.y > offsetY && mvKeys[i].pt.y < (HEIGHT - offsetY))) {
+                mvKeystmp[j] = mvKeys[i];
+                j++;
+            }
+        }
+        Log::write(__FUNCTION__, "Keypoints: ", j);
+        Log::write(__FUNCTION__, "Out of:    ", N);
+        mvKeys.resize(j);
+        N=j;
+        for(int k=0;k<N;k++) {
+            mvKeys[k] = mvKeystmp[k];
+        }
+    }
+    // END Filtering Keypoints Bommel
+
     if(mDistCoef.at<float>(0)==0.0)
     {
         mvKeysUn=mvKeys;
@@ -422,14 +492,16 @@ void Frame::UndistortKeyPoints()
     cv::undistortPoints(mat,mat,mK,mDistCoef,cv::Mat(),mK);
     mat=mat.reshape(1);
 
+
     // Fill undistorted keypoint vector
     mvKeysUn.resize(N);
-    for(int i=0; i<N; i++)
-    {
-        cv::KeyPoint kp = mvKeys[i];
-        kp.pt.x=mat.at<float>(i,0);
-        kp.pt.y=mat.at<float>(i,1);
-        mvKeysUn[i]=kp;
+
+    for(int i=0; i<N; i++) {
+      cv::KeyPoint kp = mvKeys[i];
+      kp.pt.x = mat.at<float>(i, 0);
+      kp.pt.y = mat.at<float>(i, 1);
+      mvKeysUn[i] = kp;
+
     }
 }
 
@@ -437,6 +509,7 @@ void Frame::ComputeImageBounds(const cv::Mat &imLeft)
 {
     if(mDistCoef.at<float>(0)!=0.0)
     {
+
         cv::Mat mat(4,2,CV_32F);
         mat.at<float>(0,0)=0.0; mat.at<float>(0,1)=0.0;
         mat.at<float>(1,0)=imLeft.cols; mat.at<float>(1,1)=0.0;

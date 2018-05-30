@@ -26,9 +26,13 @@
 #include "KeyFrame.h"
 #include "LoopClosing.h"
 #include "Frame.h"
-
+#ifdef __APPLE__
+#include "Thirdparty/macOS/g2o/g2o/types/types_seven_dof_expmap.h"
+#elif _WIN32
 #include "Thirdparty/win/g2o/g2o/types/types_seven_dof_expmap.h"
-
+#elif __linux__ 
+#include "Thirdparty/linux/g2o/g2o/types/types_seven_dof_expmap.h"
+#endif
 namespace ORB_SLAM2
 {
 

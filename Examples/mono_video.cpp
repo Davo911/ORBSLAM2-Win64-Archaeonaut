@@ -3,7 +3,7 @@
 #include "CSV.h"
 #include "Log.h"
 #include "Settings.h"
-
+#include "Color.h"
 #include <iostream>
 #include <future>
 #include <thread>

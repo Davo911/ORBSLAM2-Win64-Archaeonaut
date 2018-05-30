@@ -35,7 +35,7 @@ class Initializer
 public:
 
     // Fix the reference frame
-    Initializer(const Frame &ReferenceFrame, float sigma = 1.0, int iterations = 200);
+    Initializer(const Frame &ReferenceFrame);
 
     // Computes in parallel a fundamental matrix and a homography
     // Selects a model and tries to recover the motion and the structure from motion
@@ -87,13 +87,45 @@ private:
 
     // Standard Deviation and Variance
     float mSigma, mSigma2;
+    
+    float mSigma2Weight;
 
-    // Ransac max iterations
+    // Ransac max iterations (from settings file)
     int mMaxIterations;
 
     // Ransac sets
-    vector<vector<size_t> > mvSets;   
-
+    vector<vector<size_t> > mvSets;
+    
+    // minimal parallax (from settings file)
+    float mMinParallax;
+    float mParallaxThreshold;
+    
+    // minimal number of triangulated points (from settings file)
+    int mMinTriangulated;
+    
+    // ratio score threshold (SH vs SF) (from settings file)
+    float mRatioScoreThreshold;
+    
+    // (from settings file)
+    float mCheckHomographyTreshold;
+    
+    // (from settings file)
+    float mCheckFundamentalTreshold;
+    
+    // (from settings file)
+    float mCheckFundamentalTresholdScore;
+    
+    // (from settings file)
+    float mFundamentalInlierWeight;
+    
+    // (from settings file)
+    float mFundamentalSimilarityWeight;
+    
+    // (from settings file)
+    float mHomographyInlierWeight;
+    
+    // (from settings file)
+    float mHomographySimilarityWeight;
 };
 
 } //namespace ORB_SLAM

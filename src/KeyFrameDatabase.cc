@@ -21,8 +21,11 @@
 #include "KeyFrameDatabase.h"
 
 #include "KeyFrame.h"
+#ifdef __APPLE__
+#include "Thirdparty/macOS/DBoW2/DBoW2/BowVector.h"
+#else
 #include "Thirdparty/win/DBoW2/DBoW2/BowVector.h"
-
+#endif
 #include<mutex>
 
 using namespace std;

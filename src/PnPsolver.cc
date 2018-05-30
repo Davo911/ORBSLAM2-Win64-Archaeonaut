@@ -55,7 +55,11 @@
 #include <vector>
 #include <cmath>
 #include <opencv2/core/core.hpp>
+#ifdef __APPLE__
+#include "Thirdparty/macOS/DBoW2/DUtils/Random.h"
+#else
 #include "Thirdparty/win/DBoW2/DUtils/Random.h"
+#endif
 #include <algorithm>
 
 using namespace std;

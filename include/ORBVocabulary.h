@@ -21,13 +21,25 @@
 
 #ifndef ORBVOCABULARY_H
 #define ORBVOCABULARY_H
+#ifdef __APPLE__
+#include "Thirdparty/macOS/DBoW2/DBoW2/BowVector.h"
+#include "Thirdparty/macOS/DBoW2/DBoW2/FeatureVector.h"
+#include "Thirdparty/macOS/DBoW2/DBoW2/FORB.h"
+#include "Thirdparty/macOS/DBoW2/DBoW2/TemplatedVocabulary.h"
+#elif _WIN32
+#include "Thirdparty\win\DBoW2\DBoW2\BowVector.h"
+#include "Thirdparty\win\DBoW2\DBoW2\FeatureVector.h"
+#include "Thirdparty\win\DBoW2\DBoW2\FORB.h"
+#include "Thirdparty\win\DBoW2\DBoW2\TemplatedVocabulary.h"
+#elif __linux__ 
+#include "Thirdparty/linux/DBoW2/DBoW2/BowVector.h"
+#include "Thirdparty/linux/DBoW2/DBoW2/FeatureVector.h"
+#include "Thirdparty/linux/DBoW2/DBoW2/FORB.h"
+#include "Thirdparty/linux/DBoW2/DBoW2/TemplatedVocabulary.h"
 
-#include"Thirdparty/win/DBoW2/DBoW2/FORB.h"
-#include"Thirdparty/win/DBoW2/DBoW2/TemplatedVocabulary.h"
-
+#endif
 namespace ORB_SLAM2
 {
-
 typedef DBoW2::TemplatedVocabulary<DBoW2::FORB::TDescriptor, DBoW2::FORB>
   ORBVocabulary;
 

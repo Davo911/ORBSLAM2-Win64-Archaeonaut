@@ -19,31 +19,44 @@
 */
 
 #include "Initializer.h"
-
+#ifdef __APPLE__
+#include "Thirdparty/macOS/DBoW2/DUtils/Random.h"
+#else
 #include "Thirdparty/win/DBoW2/DUtils/Random.h"
-
+#endif
 #include "Optimizer.h"
 #include "ORBmatcher.h"
+#include "Settings.h"
+#include "Log.h"
 
 #include<thread>
 
 namespace ORB_SLAM2
 {
 
-Initializer::Initializer(const Frame &ReferenceFrame, float sigma, int iterations)
-{
+Initializer::Initializer(const Frame &ReferenceFrame) {
+    cv::FileStorage fSettings(Settings::path, cv::FileStorage::READ);
     mK = ReferenceFrame.mK.clone();
-
     mvKeys1 = ReferenceFrame.mvKeysUn;
-
-    mSigma = sigma;
-    mSigma2 = sigma*sigma;
-    mMaxIterations = iterations;
+    mSigma =                         (0.f == static_cast<float>(fSettings["Initializer.sigma"]))                          ? 1.0      : fSettings["Initializer.sigma"];
+    mSigma2 = mSigma * mSigma;
+    mMaxIterations =                 (0 == static_cast<int>(fSettings["Initializer.iterations"]))                         ? 200      : fSettings["Initializer.iterations"];
+    mMinParallax =                   (0.f == static_cast<float>(fSettings["Initializer.minParallax"]))                    ? 1.f      : fSettings["Initializer.minParallax"];
+    mParallaxThreshold =             (0.f == static_cast<float>(fSettings["Initializer.parallaxThreshold"]))              ? 0.99998f : fSettings["Initializer.parallaxThreshold"];
+    mMinTriangulated =               (0 == static_cast<int>(fSettings["Initializer.minTriangulated"]))                    ? 50       : fSettings["Initializer.minTriangulated"];
+    mRatioScoreThreshold =           (0.f == static_cast<float>(fSettings["Initializer.ratioScoreThreshold"]))            ? 0.4f     : fSettings["Initializer.ratioScoreThreshold"];
+    mCheckHomographyTreshold =       (0.f == static_cast<float>(fSettings["Initializer.checkHomographyThreshold"]))       ? 5.991f   : fSettings["Initializer.checkHomographyThreshold"];
+    mCheckFundamentalTreshold =      (0.f == static_cast<float>(fSettings["Initializer.checkFundamentalThreshold"]))      ? 3.841f   : fSettings["Initializer.checkFundamentalThreshold"];
+    mCheckFundamentalTresholdScore = (0.f == static_cast<float>(fSettings["Initializer.checkFundamentalThresholdScore"])) ? 5.991f : fSettings["Initializer.checkFundamentalThresholdScore"];
+    mFundamentalInlierWeight =       (0.f == static_cast<float>(fSettings["Initializer.fundamentalInlierWeight"]))        ? 0.9f     : fSettings["Initializer.fundamentalInlierWeight"];
+    mHomographyInlierWeight =        (0.f == static_cast<float>(fSettings["Initializer.homographyInlierWeight"]))         ? 0.9f     : fSettings["Initializer.homographyInlierWeight"];
+    mFundamentalSimilarityWeight =   (0.f == static_cast<float>(fSettings["Initializer.fundamentalSimilarityWeight"]))    ? 0.7f     : fSettings["Initializer.fundamentalSimilarityWeight"];
+    mHomographySimilarityWeight =    (0.f == static_cast<float>(fSettings["Initializer.homographySimilarityWeight"]))     ? 0.75f    : fSettings["Initializer.homographySimilarityWeight"];
 }
 
+    
 bool Initializer::Initialize(const Frame &CurrentFrame, const vector<int> &vMatches12, cv::Mat &R21, cv::Mat &t21,
-                             vector<cv::Point3f> &vP3D, vector<bool> &vbTriangulated)
-{
+                             vector<cv::Point3f> &vP3D, vector<bool> &vbTriangulated) {
     // Fill structures with current keypoints and matches with reference frame
     // Reference Frame: 1, Current Frame: 2
     mvKeys2 = CurrentFrame.mvKeysUn;
@@ -110,19 +123,21 @@ bool Initializer::Initialize(const Frame &CurrentFrame, const vector<int> &vMatc
 
     // Compute ratio of scores
     float RH = SH/(SH+SF);
+    
+    Log::write(__FUNCTION__, "SH=", SH, "SF=", SF, "RH=", RH);
 
     // Try to reconstruct from homography or fundamental depending on the ratio (0.40-0.45)
-    if(RH>0.40)
-        return ReconstructH(vbMatchesInliersH,H,mK,R21,t21,vP3D,vbTriangulated,1.0,50);
+    if(RH > mRatioScoreThreshold)
+        return ReconstructH(vbMatchesInliersH,H,mK,R21,t21,vP3D,vbTriangulated,mMinParallax,mMinTriangulated);
     else //if(pF_HF>0.6)
-        return ReconstructF(vbMatchesInliersF,F,mK,R21,t21,vP3D,vbTriangulated,1.0,50);
+        return ReconstructF(vbMatchesInliersF,F,mK,R21,t21,vP3D,vbTriangulated,mMinParallax,mMinTriangulated);
 
     return false;
 }
 
 
-void Initializer::FindHomography(vector<bool> &vbMatchesInliers, float &score, cv::Mat &H21)
-{
+void Initializer::FindHomography(vector<bool> &vbMatchesInliers, float &score, cv::Mat &H21) {
+    
     // Number of putative matches
     const int N = mvMatches12.size();
 
@@ -172,8 +187,7 @@ void Initializer::FindHomography(vector<bool> &vbMatchesInliers, float &score, c
 }
 
 
-void Initializer::FindFundamental(vector<bool> &vbMatchesInliers, float &score, cv::Mat &F21)
-{
+void Initializer::FindFundamental(vector<bool> &vbMatchesInliers, float &score, cv::Mat &F21) {
     // Number of putative matches
     const int N = vbMatchesInliers.size();
 
@@ -265,6 +279,7 @@ cv::Mat Initializer::ComputeH21(const vector<cv::Point2f> &vP1, const vector<cv:
     return vt.row(8).reshape(0, 3);
 }
 
+    
 cv::Mat Initializer::ComputeF21(const vector<cv::Point2f> &vP1,const vector<cv::Point2f> &vP2)
 {
     const int N = vP1.size();
@@ -302,8 +317,9 @@ cv::Mat Initializer::ComputeF21(const vector<cv::Point2f> &vP1,const vector<cv::
     return  u*cv::Mat::diag(w)*vt;
 }
 
+    
 float Initializer::CheckHomography(const cv::Mat &H21, const cv::Mat &H12, vector<bool> &vbMatchesInliers, float sigma)
-{   
+{
     const int N = mvMatches12.size();
 
     const float h11 = H21.at<float>(0,0);
@@ -330,7 +346,7 @@ float Initializer::CheckHomography(const cv::Mat &H21, const cv::Mat &H12, vecto
 
     float score = 0;
 
-    const float th = 5.991;
+    const float th = mCheckHomographyTreshold;
 
     const float invSigmaSquare = 1.0/(sigma*sigma);
 
@@ -387,6 +403,7 @@ float Initializer::CheckHomography(const cv::Mat &H21, const cv::Mat &H12, vecto
     return score;
 }
 
+    
 float Initializer::CheckFundamental(const cv::Mat &F21, vector<bool> &vbMatchesInliers, float sigma)
 {
     const int N = mvMatches12.size();
@@ -405,8 +422,8 @@ float Initializer::CheckFundamental(const cv::Mat &F21, vector<bool> &vbMatchesI
 
     float score = 0;
 
-    const float th = 3.841;
-    const float thScore = 5.991;
+    const float th = mCheckFundamentalTreshold;
+    const float thScore = mCheckFundamentalTresholdScore;
 
     const float invSigmaSquare = 1.0/(sigma*sigma);
 
@@ -467,9 +484,9 @@ float Initializer::CheckFundamental(const cv::Mat &F21, vector<bool> &vbMatchesI
     return score;
 }
 
+    
 bool Initializer::ReconstructF(vector<bool> &vbMatchesInliers, cv::Mat &F21, cv::Mat &K,
-                            cv::Mat &R21, cv::Mat &t21, vector<cv::Point3f> &vP3D, vector<bool> &vbTriangulated, float minParallax, int minTriangulated)
-{
+                            cv::Mat &R21, cv::Mat &t21, vector<cv::Point3f> &vP3D, vector<bool> &vbTriangulated, float minParallax, int minTriangulated) {
     int N=0;
     for(size_t i=0, iend = vbMatchesInliers.size() ; i<iend; i++)
         if(vbMatchesInliers[i])
@@ -501,77 +518,73 @@ bool Initializer::ReconstructF(vector<bool> &vbMatchesInliers, cv::Mat &F21, cv:
     R21 = cv::Mat();
     t21 = cv::Mat();
 
-    int nMinGood = max(static_cast<int>(0.9*N),minTriangulated);
+    int nMinGood = max(static_cast<int>(mFundamentalInlierWeight * N),minTriangulated);
 
     int nsimilar = 0;
-    if(nGood1>0.7*maxGood)
+    if(nGood1 > mFundamentalSimilarityWeight * maxGood)
         nsimilar++;
-    if(nGood2>0.7*maxGood)
+    if(nGood2 > mFundamentalSimilarityWeight * maxGood)
         nsimilar++;
-    if(nGood3>0.7*maxGood)
+    if(nGood3 > mFundamentalSimilarityWeight * maxGood)
         nsimilar++;
-    if(nGood4>0.7*maxGood)
+    if(nGood4 > mFundamentalSimilarityWeight * maxGood)
         nsimilar++;
 
     // If there is not a clear winner or not enough triangulated points reject initialization
-    if(maxGood<nMinGood || nsimilar>1)
-    {
+    if (maxGood<nMinGood || nsimilar>1) {
+        Log::write(__FUNCTION__, "maxGood=", maxGood, "nMinGood=", nMinGood, "nsimilar=", nsimilar);
+        Log::write(__FUNCTION__, "initialization failed: maxGood < nMinGood || nsimilar > 1");
         return false;
     }
 
     // If best reconstruction has enough parallax initialize
-    if(maxGood==nGood1)
-    {
-        if(parallax1>minParallax)
-        {
+    if (maxGood==nGood1) {
+        Log::write(__FUNCTION__, "parallax1=", parallax1, "minParallax=", minParallax);
+        if(parallax1>minParallax) {
             vP3D = vP3D1;
             vbTriangulated = vbTriangulated1;
-
             R1.copyTo(R21);
             t1.copyTo(t21);
             return true;
         }
-    }else if(maxGood==nGood2)
-    {
-        if(parallax2>minParallax)
-        {
+        Log::write(__FUNCTION__, "initialization failed: parallax1 > minParallax");
+    } else if (maxGood==nGood2) {
+        Log::write(__FUNCTION__, "parallax2=", parallax2, "minParallax=", minParallax);
+        if (parallax2>minParallax) {
             vP3D = vP3D2;
             vbTriangulated = vbTriangulated2;
-
             R2.copyTo(R21);
             t1.copyTo(t21);
             return true;
         }
-    }else if(maxGood==nGood3)
-    {
-        if(parallax3>minParallax)
-        {
+        Log::write(__FUNCTION__, "initialization failed: parallax2 > minParallax");
+    } else if (maxGood==nGood3) {
+        Log::write(__FUNCTION__, "\tparallax3=", parallax3, "minParallax=", minParallax);
+        if (parallax3>minParallax) {
             vP3D = vP3D3;
             vbTriangulated = vbTriangulated3;
-
             R1.copyTo(R21);
             t2.copyTo(t21);
             return true;
         }
-    }else if(maxGood==nGood4)
-    {
-        if(parallax4>minParallax)
-        {
+        Log::write(__FUNCTION__, "initialization failed: parallax3 > minParallax");
+    } else if (maxGood==nGood4) {
+        Log::write(__FUNCTION__, "parallax4=", parallax4, "minParallax=", minParallax);
+        if (parallax4>minParallax) {
             vP3D = vP3D4;
             vbTriangulated = vbTriangulated4;
-
             R2.copyTo(R21);
             t2.copyTo(t21);
             return true;
         }
+        Log::write(__FUNCTION__, "initialization failed: parallax4 > minParallax");
     }
 
     return false;
 }
 
 bool Initializer::ReconstructH(vector<bool> &vbMatchesInliers, cv::Mat &H21, cv::Mat &K,
-                      cv::Mat &R21, cv::Mat &t21, vector<cv::Point3f> &vP3D, vector<bool> &vbTriangulated, float minParallax, int minTriangulated)
-{
+                      cv::Mat &R21, cv::Mat &t21, vector<cv::Point3f> &vP3D, vector<bool> &vbTriangulated, float minParallax, int minTriangulated) {
     int N=0;
     for(size_t i=0, iend = vbMatchesInliers.size() ; i<iend; i++)
         if(vbMatchesInliers[i])
@@ -695,36 +708,41 @@ bool Initializer::ReconstructH(vector<bool> &vbMatchesInliers, cv::Mat &H21, cv:
 
     // Instead of applying the visibility constraints proposed in the Faugeras' paper (which could fail for points seen with low parallax)
     // We reconstruct all hypotheses and check in terms of triangulated points and parallax
-    for(size_t i=0; i<8; i++)
-    {
+    for (size_t i=0; i<8; i++) {
         float parallaxi;
         vector<cv::Point3f> vP3Di;
         vector<bool> vbTriangulatedi;
         int nGood = CheckRT(vR[i],vt[i],mvKeys1,mvKeys2,mvMatches12,vbMatchesInliers,K,vP3Di, 4.0*mSigma2, vbTriangulatedi, parallaxi);
+        
+        Log::write(__FUNCTION__, "CheckRT \t nGood=", nGood, "parallax=", parallaxi);
 
-        if(nGood>bestGood)
-        {
-            secondBestGood = bestGood;
+        if (nGood > bestGood) {
+            //secondBestGood = bestGood;
             bestGood = nGood;
             bestSolutionIdx = i;
             bestParallax = parallaxi;
             bestP3D = vP3Di;
             bestTriangulated = vbTriangulatedi;
-        }
-        else if(nGood>secondBestGood)
-        {
+        } else if (nGood>secondBestGood && nGood!=bestGood) {
             secondBestGood = nGood;
         }
     }
-
-
-    if(secondBestGood<0.75*bestGood && bestParallax>=minParallax && bestGood>minTriangulated && bestGood>0.9*N)
-    {
+    
+    bool passedBestCheck = bestGood > mHomographyInlierWeight * N;
+    bool passedSecondBestCheck = secondBestGood < mHomographySimilarityWeight * bestGood;
+    bool passedParallaxCheck = bestParallax >= minParallax;
+    bool passedTriangulationCheck = bestGood > minTriangulated;
+    
+    Log::write(__FUNCTION__, "bestGood > mHomographyInlierWeight * N =", passedBestCheck);
+    Log::write(__FUNCTION__, "secondBestGood < mHomographySimilarityWeight * bestGood =", passedSecondBestCheck);
+    Log::write(__FUNCTION__, "bestParallax >= minParallax =", passedParallaxCheck);
+    Log::write(__FUNCTION__, "bestGood > minTriangulated =", passedTriangulationCheck);
+    
+    if (passedBestCheck && passedSecondBestCheck && passedTriangulationCheck && passedParallaxCheck) {
         vR[bestSolutionIdx].copyTo(R21);
         vt[bestSolutionIdx].copyTo(t21);
         vP3D = bestP3D;
         vbTriangulated = bestTriangulated;
-
         return true;
     }
 
@@ -854,13 +872,13 @@ int Initializer::CheckRT(const cv::Mat &R, const cv::Mat &t, const vector<cv::Ke
         float cosParallax = normal1.dot(normal2)/(dist1*dist2);
 
         // Check depth in front of first camera (only if enough parallax, as "infinite" points can easily go to negative depth)
-        if(p3dC1.at<float>(2)<=0 && cosParallax<0.99998)
+        if(p3dC1.at<float>(2)<=0 && cosParallax < mParallaxThreshold)
             continue;
 
         // Check depth in front of second camera (only if enough parallax, as "infinite" points can easily go to negative depth)
         cv::Mat p3dC2 = R*p3dC1+t;
 
-        if(p3dC2.at<float>(2)<=0 && cosParallax<0.99998)
+        if(p3dC2.at<float>(2)<=0 && cosParallax < mParallaxThreshold)
             continue;
 
         // Check reprojection error in first image
@@ -889,7 +907,7 @@ int Initializer::CheckRT(const cv::Mat &R, const cv::Mat &t, const vector<cv::Ke
         vP3D[vMatches12[i].first] = cv::Point3f(p3dC1.at<float>(0),p3dC1.at<float>(1),p3dC1.at<float>(2));
         nGood++;
 
-        if(cosParallax<0.99998)
+        if(cosParallax < mParallaxThreshold)
             vbGood[vMatches12[i].first]=true;
     }
 
@@ -897,7 +915,7 @@ int Initializer::CheckRT(const cv::Mat &R, const cv::Mat &t, const vector<cv::Ke
     {
         sort(vCosParallax.begin(),vCosParallax.end());
 
-        size_t idx = min(50,int(vCosParallax.size()-1));
+        size_t idx = min(mMinTriangulated,int(vCosParallax.size()-1));
         parallax = acos(vCosParallax[idx])*180/CV_PI;
     }
     else

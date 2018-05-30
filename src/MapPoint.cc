@@ -270,20 +270,19 @@ void MapPoint::ComputeDistinctiveDescriptors()
         return;
 
     // Compute distances between them
-    size_t N = vDescriptors.size();
+	size_t N = vDescriptors.size();
 	std::vector<std::vector<float> > Distances;
 	Distances.resize(N, vector<float>(N, 0));
 	for (size_t i = 0; i<N; i++)
 	{
 		Distances[i][i] = 0;
-		for (size_t j = i + 1;j<N;j++)
+		for (size_t j = i + 1; j<N; j++)
 		{
 			int distij = ORBmatcher::DescriptorDistance(vDescriptors[i], vDescriptors[j]);
 			Distances[i][j] = distij;
 			Distances[j][i] = distij;
 		}
 	}
-
 
     // Take the descriptor with least median distance to the rest
     int BestMedian = INT_MAX;

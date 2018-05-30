@@ -126,10 +126,16 @@ Eigen::Matrix<double,3,1> Converter::toVector3d(const cv::Point3f &cvPoint)
 Eigen::Matrix<double,3,3> Converter::toMatrix3d(const cv::Mat &cvMat3)
 {
     Eigen::Matrix<double,3,3> M;
-
-    M << cvMat3.at<float>(0,0), cvMat3.at<float>(0,1), cvMat3.at<float>(0,2),
-         cvMat3.at<float>(1,0), cvMat3.at<float>(1,1), cvMat3.at<float>(1,2),
-         cvMat3.at<float>(2,0), cvMat3.at<float>(2,1), cvMat3.at<float>(2,2);
+    
+    if (cvMat3.rows != 3 || cvMat3.cols != 3) {
+        M << 0,0,0,
+             0,0,0,
+             0,0,0;
+    } else {
+        M << cvMat3.at<float>(0,0), cvMat3.at<float>(0,1), cvMat3.at<float>(0,2),
+             cvMat3.at<float>(1,0), cvMat3.at<float>(1,1), cvMat3.at<float>(1,2),
+             cvMat3.at<float>(2,0), cvMat3.at<float>(2,1), cvMat3.at<float>(2,2);
+    }
 
     return M;
 }
@@ -147,5 +153,19 @@ std::vector<float> Converter::toQuaternion(const cv::Mat &M)
 
     return v;
 }
+
+    std::vector<float> Converter::toPosition(const cv::Mat &position) {
+        std::vector<float> v(3);
+        if (position.rows == 3) {
+            v[0] = position.at<float>(0);
+            v[1] = position.at<float>(1);
+            v[2] = position.at<float>(2);
+        } else {
+            v[0] = 0.f;
+            v[1] = 0.f;
+            v[2] = 0.f;
+        }
+        return v;
+    }
 
 } //namespace ORB_SLAM

@@ -27,8 +27,11 @@
 
 #include "KeyFrame.h"
 #include "ORBmatcher.h"
-
+#ifdef __APPLE__
+#include "Thirdparty/macOS/DBoW2/DUtils/Random.h"
+#else
 #include "Thirdparty/win/DBoW2/DUtils/Random.h"
+#endif
 
 namespace ORB_SLAM2
 {

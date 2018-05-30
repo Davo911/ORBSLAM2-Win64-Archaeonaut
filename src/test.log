@@ -1,0 +1,763 @@
+[13:03:56][System]: Loading ORB Vocabulary.
+[13:03:56][System]: ORB Vocabulary loaded.
+Eingelesen
+
+
+[13:03:57][processSLAM]: ###############################################
+[13:03:57][processSLAM]: frame= 1350
+[13:03:57][GrabImageMonocular]: CLAHE_duration= 14
+[13:03:57][Frame]: features= 4006
+[13:03:57][GrabImageMonocular]: ORB_extraction_duration= 230
+[13:03:57][Track]: initialization_duration= 1
+[13:03:57][GrabImageMonocular]: tracking_duration= 1
+[13:03:57][TrackMonocular]: State= 1
+[13:03:57][processSLAM]: tracking_duration= 259
+
+
+[13:03:57][processSLAM]: ###############################################
+[13:03:57][processSLAM]: frame= 1351
+[13:03:57][GrabImageMonocular]: CLAHE_duration= 9
+[13:03:57][DrawTextInfo]: matches= 0
+[13:03:57][DrawTextInfo]: matches= 0
+[13:03:57][DrawTextInfo]: matches= 0
+[13:03:57][DrawTextInfo]: matches= 0
+[13:03:57][DrawTextInfo]: matches= 0
+[13:03:57][Frame]: features= 4006
+[13:03:57][GrabImageMonocular]: ORB_extraction_duration= 240
+[13:03:57][SearchForInitialization]: keypoints= 4006 level0= 3137
+[13:03:57][SearchForInitialization]: matches before rotation check = 140
+[13:03:57][SearchForInitialization]: matches after rotation check = 139
+[13:03:57][MonocularInitialization]: matches = 139
+[13:03:57][Initialize]: SH= 1407.04 SF= 1557.52 RH= 0.47462
+[13:03:57][ReconstructH]: CheckRT 	 nGood= 135 parallax= 0.234068
+[13:03:57][ReconstructH]: CheckRT 	 nGood= 135 parallax= 0.126669
+[13:03:58][DrawTextInfo]: matches= 0
+[13:03:58][ReconstructH]: CheckRT 	 nGood= 135 parallax= 0.126669
+[13:03:58][ReconstructH]: CheckRT 	 nGood= 135 parallax= 0.234068
+[13:03:58][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:03:58][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:03:58][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:03:58][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:03:58][ReconstructH]: bestGood > mHomographyInlierWeight * N = 1
+[13:03:58][ReconstructH]: secondBestGood < mHomographySimilarityWeight * bestGood = 1
+[13:03:58][ReconstructH]: bestParallax >= minParallax = 0
+[13:03:58][ReconstructH]: bestGood > minTriangulated = 1
+[13:03:58][Track]: initialization_duration= 35
+[13:03:58][GrabImageMonocular]: tracking_duration= 35
+[13:03:58][TrackMonocular]: State= 1
+[13:03:58][processSLAM]: tracking_duration= 288
+
+
+[13:03:58][processSLAM]: ###############################################
+[13:03:58][processSLAM]: frame= 1352
+[13:03:58][GrabImageMonocular]: CLAHE_duration= 9
+[13:03:58][DrawTextInfo]: matches= 139
+[13:03:58][DrawTextInfo]: matches= 139
+[13:03:58][DrawTextInfo]: matches= 139
+[13:03:58][DrawTextInfo]: matches= 139
+[13:03:58][DrawTextInfo]: matches= 139
+[13:03:58][Frame]: features= 4006
+[13:03:58][GrabImageMonocular]: ORB_extraction_duration= 235
+[13:03:58][SearchForInitialization]: keypoints= 4006 level0= 3137
+[13:03:58][SearchForInitialization]: matches before rotation check = 95
+[13:03:58][SearchForInitialization]: matches after rotation check = 94
+[13:03:58][MonocularInitialization]: matches = 94
+[13:03:58][Initialize]: SH= 938.706 SF= 1050 RH= 0.472018
+[13:03:58][ReconstructH]: CheckRT 	 nGood= 91 parallax= 0.337462
+[13:03:58][ReconstructH]: CheckRT 	 nGood= 93 parallax= 0.185575
+[13:03:58][ReconstructH]: CheckRT 	 nGood= 93 parallax= 0.185575
+[13:03:58][ReconstructH]: CheckRT 	 nGood= 93 parallax= 0.34435
+[13:03:58][DrawTextInfo]: matches= 139
+[13:03:58][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:03:58][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:03:58][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:03:58][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:03:58][ReconstructH]: bestGood > mHomographyInlierWeight * N = 1
+[13:03:58][ReconstructH]: secondBestGood < mHomographySimilarityWeight * bestGood = 1
+[13:03:58][ReconstructH]: bestParallax >= minParallax = 0
+[13:03:58][ReconstructH]: bestGood > minTriangulated = 1
+[13:03:58][Track]: initialization_duration= 34
+[13:03:58][GrabImageMonocular]: tracking_duration= 34
+[13:03:58][TrackMonocular]: State= 1
+[13:03:58][processSLAM]: tracking_duration= 283
+
+
+[13:03:58][processSLAM]: ###############################################
+[13:03:58][processSLAM]: frame= 1353
+[13:03:58][GrabImageMonocular]: CLAHE_duration= 9
+[13:03:58][DrawTextInfo]: matches= 94
+[13:03:58][DrawTextInfo]: matches= 94
+[13:03:58][DrawTextInfo]: matches= 94
+[13:03:58][DrawTextInfo]: matches= 94
+[13:03:58][DrawTextInfo]: matches= 94
+[13:03:58][Frame]: features= 4006
+[13:03:58][GrabImageMonocular]: ORB_extraction_duration= 250
+[13:03:58][SearchForInitialization]: keypoints= 4006 level0= 3137
+[13:03:58][SearchForInitialization]: matches before rotation check = 89
+[13:03:58][SearchForInitialization]: matches after rotation check = 89
+[13:03:58][MonocularInitialization]: matches = 89
+[13:03:58][Initialize]: SH= 786.276 SF= 935.428 RH= 0.456685
+[13:03:58][ReconstructH]: CheckRT 	 nGood= 86 parallax= 1.10447
+[13:03:58][ReconstructH]: CheckRT 	 nGood= 86 parallax= 0.246288
+[13:03:58][ReconstructH]: CheckRT 	 nGood= 86 parallax= 0.246288
+[13:03:58][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:03:58][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:03:58][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:03:58][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:03:58][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:03:58][ReconstructH]: bestGood > mHomographyInlierWeight * N = 1
+[13:03:58][ReconstructH]: secondBestGood < mHomographySimilarityWeight * bestGood = 1
+[13:03:58][ReconstructH]: bestParallax >= minParallax = 1
+[13:03:58][ReconstructH]: bestGood > minTriangulated = 1
+[13:03:58][MonocularInitialization]: SUCCSSEEDED initialization
+[13:03:58][DrawTextInfo]: matches= 94
+New Map created with 86 points
+[13:03:58][Track]: initialization_duration= 71
+[13:03:58][GrabImageMonocular]: tracking_duration= 71
+[13:03:58][TrackMonocular]: State= 2
+[13:03:58][processSLAM]: tracking_duration= 334
+
+
+[13:03:58][processSLAM]: ###############################################
+[13:03:58][processSLAM]: frame= 1354
+[13:03:58][DrawTextInfo]: matches= 94
+[13:03:58][GrabImageMonocular]: CLAHE_duration= 12
+[13:03:58][Run]: local_mapping_duration= 37
+[13:03:58][DrawTextInfo]: matches= 86
+[13:03:58][Run]: local_mapping_duration= 28
+[13:03:58][Run]: loop_closure_duration= 0
+[13:03:58][DrawTextInfo]: matches= 86
+[13:03:58][DrawTextInfo]: matches= 86
+[13:03:58][DrawTextInfo]: matches= 86
+[13:03:58][DrawTextInfo]: matches= 86
+[13:03:58][Frame]: features= 2002
+[13:03:58][GrabImageMonocular]: ORB_extraction_duration= 250
+[13:03:58][Track]: KeyFramesInMap<=5 Track lost soon after initialisation, reseting...
+[13:03:58][GrabImageMonocular]: tracking_duration= 9
+[13:03:58][TrackMonocular]: State= 3
+[13:03:58][processSLAM]: tracking_duration= 277
+
+
+[13:03:58][processSLAM]: ###############################################
+[13:03:58][processSLAM]: frame= 1355
+[13:03:58][DrawTextInfo]: matches= 0
+[13:03:58][GrabImageMonocular]: CLAHE_duration= 11
+[13:03:59][DrawTextInfo]: matches= 0
+[13:03:59][DrawTextInfo]: matches= 0
+[13:03:59][DrawTextInfo]: matches= 0
+[13:03:59][DrawTextInfo]: matches= 0
+[13:03:59][Frame]: features= 4006
+[13:03:59][GrabImageMonocular]: ORB_extraction_duration= 232
+[13:03:59][Track]: initialization_duration= 2
+[13:03:59][GrabImageMonocular]: tracking_duration= 2
+[13:03:59][TrackMonocular]: State= 1
+[13:03:59][processSLAM]: tracking_duration= 268
+[13:03:59][DrawTextInfo]: matches= 0
+
+
+[13:03:59][processSLAM]: ###############################################
+[13:03:59][processSLAM]: frame= 1356
+[13:03:59][GrabImageMonocular]: CLAHE_duration= 11
+[13:03:59][DrawTextInfo]: matches= 0
+[13:03:59][DrawTextInfo]: matches= 0
+[13:03:59][DrawTextInfo]: matches= 0
+[13:03:59][DrawTextInfo]: matches= 0
+[13:03:59][DrawTextInfo]: matches= 0
+[13:03:59][Frame]: features= 4006
+[13:03:59][GrabImageMonocular]: ORB_extraction_duration= 257
+[13:03:59][SearchForInitialization]: keypoints= 4006 level0= 3137
+[13:03:59][SearchForInitialization]: matches before rotation check = 161
+[13:03:59][SearchForInitialization]: matches after rotation check = 160
+[13:03:59][MonocularInitialization]: matches = 160
+[13:03:59][Initialize]: SH= 1653.25 SF= 1825.57 RH= 0.475233
+[13:03:59][ReconstructH]: CheckRT 	 nGood= 159 parallax= 0.426585
+[13:03:59][ReconstructH]: CheckRT 	 nGood= 159 parallax= 0.172459
+[13:03:59][ReconstructH]: CheckRT 	 nGood= 159 parallax= 0.172459
+[13:03:59][ReconstructH]: CheckRT 	 nGood= 94 parallax= 0.352215
+[13:03:59][DrawTextInfo]: matches= 0
+[13:03:59][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:03:59][ReconstructH]: CheckRT 	 nGood= 2 parallax= 0.0197823
+[13:03:59][ReconstructH]: CheckRT 	 nGood= 2 parallax= 0.0197823
+[13:03:59][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:03:59][ReconstructH]: bestGood > mHomographyInlierWeight * N = 1
+[13:03:59][ReconstructH]: secondBestGood < mHomographySimilarityWeight * bestGood = 1
+[13:03:59][ReconstructH]: bestParallax >= minParallax = 0
+[13:03:59][ReconstructH]: bestGood > minTriangulated = 1
+[13:03:59][Track]: initialization_duration= 44
+[13:03:59][GrabImageMonocular]: tracking_duration= 45
+[13:03:59][TrackMonocular]: State= 1
+[13:03:59][processSLAM]: tracking_duration= 316
+
+
+[13:03:59][processSLAM]: ###############################################
+[13:03:59][processSLAM]: frame= 1357
+[13:03:59][GrabImageMonocular]: CLAHE_duration= 11
+[13:03:59][DrawTextInfo]: matches= 160
+[13:03:59][DrawTextInfo]: matches= 160
+[13:03:59][DrawTextInfo]: matches= 160
+[13:03:59][DrawTextInfo]: matches= 160
+[13:03:59][DrawTextInfo]: matches= 160
+[13:03:59][Frame]: features= 4006
+[13:03:59][GrabImageMonocular]: ORB_extraction_duration= 248
+[13:03:59][SearchForInitialization]: keypoints= 4006 level0= 3137
+[13:03:59][SearchForInitialization]: matches before rotation check = 110
+[13:03:59][SearchForInitialization]: matches after rotation check = 110
+[13:03:59][MonocularInitialization]: matches = 110
+[13:03:59][DrawTextInfo]: matches= 160
+[13:03:59][Initialize]: SH= 1097.69 SF= 1216.06 RH= 0.47442
+[13:03:59][ReconstructH]: CheckRT 	 nGood= 19 parallax= 0.315899
+[13:03:59][ReconstructH]: CheckRT 	 nGood= 106 parallax= 0.19881
+[13:03:59][ReconstructH]: CheckRT 	 nGood= 106 parallax= 0.19881
+[13:03:59][ReconstructH]: CheckRT 	 nGood= 106 parallax= 0.537412
+[13:03:59][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:03:59][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:03:59][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:03:59][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:03:59][ReconstructH]: bestGood > mHomographyInlierWeight * N = 1
+[13:03:59][ReconstructH]: secondBestGood < mHomographySimilarityWeight * bestGood = 1
+[13:03:59][ReconstructH]: bestParallax >= minParallax = 0
+[13:03:59][ReconstructH]: bestGood > minTriangulated = 1
+[13:03:59][Track]: initialization_duration= 28
+[13:03:59][GrabImageMonocular]: tracking_duration= 28
+[13:03:59][TrackMonocular]: State= 1
+[13:03:59][processSLAM]: tracking_duration= 292
+
+
+[13:03:59][processSLAM]: ###############################################
+[13:03:59][processSLAM]: frame= 1358
+[13:03:59][GrabImageMonocular]: CLAHE_duration= 7
+[13:03:59][DrawTextInfo]: matches= 110
+[13:03:59][DrawTextInfo]: matches= 110
+[13:03:59][DrawTextInfo]: matches= 110
+[13:03:59][DrawTextInfo]: matches= 110
+[13:04:00][DrawTextInfo]: matches= 110
+[13:04:00][Frame]: features= 4006
+[13:04:00][GrabImageMonocular]: ORB_extraction_duration= 238
+[13:04:00][SearchForInitialization]: keypoints= 4006 level0= 3137
+[13:04:00][SearchForInitialization]: matches before rotation check = 105
+[13:04:00][SearchForInitialization]: matches after rotation check = 103
+[13:04:00][MonocularInitialization]: matches = 103
+[13:04:00][Initialize]: SH= 1019.3 SF= 1139.14 RH= 0.472239
+[13:04:00][ReconstructH]: CheckRT 	 nGood= 102 parallax= 1.04211
+[13:04:00][ReconstructH]: CheckRT 	 nGood= 99 parallax= 0.191797
+[13:04:00][ReconstructH]: CheckRT 	 nGood= 102 parallax= 0.213062
+[13:04:00][DrawTextInfo]: matches= 110
+[13:04:00][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:04:00][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:04:00][ReconstructH]: CheckRT 	 nGood= 4 parallax= 0.0197823
+[13:04:00][ReconstructH]: CheckRT 	 nGood= 4 parallax= 0.0197823
+[13:04:00][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:04:00][ReconstructH]: bestGood > mHomographyInlierWeight * N = 1
+[13:04:00][ReconstructH]: secondBestGood < mHomographySimilarityWeight * bestGood = 0
+[13:04:00][ReconstructH]: bestParallax >= minParallax = 1
+[13:04:00][ReconstructH]: bestGood > minTriangulated = 1
+[13:04:00][Track]: initialization_duration= 37
+[13:04:00][GrabImageMonocular]: tracking_duration= 37
+[13:04:00][TrackMonocular]: State= 1
+[13:04:00][processSLAM]: tracking_duration= 286
+
+
+[13:04:00][processSLAM]: ###############################################
+[13:04:00][processSLAM]: frame= 1359
+[13:04:00][GrabImageMonocular]: CLAHE_duration= 9
+[13:04:00][DrawTextInfo]: matches= 103
+[13:04:00][DrawTextInfo]: matches= 103
+[13:04:00][DrawTextInfo]: matches= 103
+[13:04:00][DrawTextInfo]: matches= 103
+[13:04:00][DrawTextInfo]: matches= 103
+[13:04:00][Frame]: features= 4006
+[13:04:00][GrabImageMonocular]: ORB_extraction_duration= 237
+[13:04:00][SearchForInitialization]: keypoints= 4006 level0= 3137
+[13:04:00][SearchForInitialization]: matches before rotation check = 91
+[13:04:00][SearchForInitialization]: matches after rotation check = 91
+[13:04:00][MonocularInitialization]: matches = 91
+[13:04:00][Initialize]: SH= 898.518 SF= 1017.52 RH= 0.468947
+[13:04:00][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:04:00][ReconstructH]: CheckRT 	 nGood= 90 parallax= 0.193827
+[13:04:00][DrawTextInfo]: matches= 103
+[13:04:00][ReconstructH]: CheckRT 	 nGood= 89 parallax= 0.189746
+[13:04:00][ReconstructH]: CheckRT 	 nGood= 90 parallax= 1.2294
+[13:04:00][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:04:00][ReconstructH]: CheckRT 	 nGood= 1 parallax= 0.314658
+[13:04:00][ReconstructH]: CheckRT 	 nGood= 1 parallax= 0.314658
+[13:04:00][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:04:00][ReconstructH]: bestGood > mHomographyInlierWeight * N = 1
+[13:04:00][ReconstructH]: secondBestGood < mHomographySimilarityWeight * bestGood = 0
+[13:04:00][ReconstructH]: bestParallax >= minParallax = 0
+[13:04:00][ReconstructH]: bestGood > minTriangulated = 1
+[13:04:00][Track]: initialization_duration= 41
+[13:04:00][GrabImageMonocular]: tracking_duration= 41
+[13:04:00][TrackMonocular]: State= 1
+[13:04:00][processSLAM]: tracking_duration= 291
+
+
+[13:04:00][processSLAM]: ###############################################
+[13:04:00][processSLAM]: frame= 1360
+[13:04:00][GrabImageMonocular]: CLAHE_duration= 10
+[13:04:00][DrawTextInfo]: matches= 91
+[13:04:00][DrawTextInfo]: matches= 91
+[13:04:00][DrawTextInfo]: matches= 91
+[13:04:00][DrawTextInfo]: matches= 91
+[13:04:00][DrawTextInfo]: matches= 91
+[13:04:00][Frame]: features= 4006
+[13:04:00][GrabImageMonocular]: ORB_extraction_duration= 278
+[13:04:00][DrawTextInfo]: matches= 91
+[13:04:00][SearchForInitialization]: keypoints= 4006 level0= 3137
+[13:04:00][SearchForInitialization]: matches before rotation check = 90
+[13:04:00][SearchForInitialization]: matches after rotation check = 89
+[13:04:00][MonocularInitialization]: matches = 89
+[13:04:00][Initialize]: SH= 848.736 SF= 962.959 RH= 0.468476
+[13:04:00][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:04:00][ReconstructH]: CheckRT 	 nGood= 85 parallax= 0.250229
+[13:04:00][ReconstructH]: CheckRT 	 nGood= 80 parallax= 0.192815
+[13:04:00][ReconstructH]: CheckRT 	 nGood= 85 parallax= 1.2518
+[13:04:00][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:04:00][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:04:00][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:04:00][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:04:00][ReconstructH]: bestGood > mHomographyInlierWeight * N = 1
+[13:04:00][ReconstructH]: secondBestGood < mHomographySimilarityWeight * bestGood = 0
+[13:04:00][ReconstructH]: bestParallax >= minParallax = 0
+[13:04:00][ReconstructH]: bestGood > minTriangulated = 1
+[13:04:00][Track]: initialization_duration= 28
+[13:04:00][GrabImageMonocular]: tracking_duration= 29
+[13:04:00][TrackMonocular]: State= 1
+[13:04:00][processSLAM]: tracking_duration= 321
+
+
+[13:04:00][processSLAM]: ###############################################
+[13:04:00][processSLAM]: frame= 1361
+[13:04:00][GrabImageMonocular]: CLAHE_duration= 11
+[13:04:00][DrawTextInfo]: matches= 89
+[13:04:00][DrawTextInfo]: matches= 89
+[13:04:00][DrawTextInfo]: matches= 89
+[13:04:00][DrawTextInfo]: matches= 89
+[13:04:00][DrawTextInfo]: matches= 89
+[13:04:00][DrawTextInfo]: matches= 89
+[13:04:01][Frame]: features= 4006
+[13:04:01][GrabImageMonocular]: ORB_extraction_duration= 263
+[13:04:01][SearchForInitialization]: keypoints= 4006 level0= 3137
+[13:04:01][SearchForInitialization]: matches before rotation check = 96
+[13:04:01][SearchForInitialization]: matches after rotation check = 96
+[13:04:01][MonocularInitialization]: matches = 96
+[13:04:01][Initialize]: SH= 890.023 SF= 1048.46 RH= 0.459135
+[13:04:01][ReconstructH]: CheckRT 	 nGood= 95 parallax= 1.66836
+[13:04:01][ReconstructH]: CheckRT 	 nGood= 85 parallax= 0.245493
+[13:04:01][ReconstructH]: CheckRT 	 nGood= 95 parallax= 0.336882
+[13:04:01][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:04:01][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:04:01][ReconstructH]: CheckRT 	 nGood= 2 parallax= 0.120331
+[13:04:01][ReconstructH]: CheckRT 	 nGood= 2 parallax= 0.120331
+[13:04:01][DrawTextInfo]: matches= 89
+[13:04:01][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:04:01][ReconstructH]: bestGood > mHomographyInlierWeight * N = 1
+[13:04:01][ReconstructH]: secondBestGood < mHomographySimilarityWeight * bestGood = 0
+[13:04:01][ReconstructH]: bestParallax >= minParallax = 1
+[13:04:01][ReconstructH]: bestGood > minTriangulated = 1
+[13:04:01][Track]: initialization_duration= 34
+[13:04:01][GrabImageMonocular]: tracking_duration= 34
+[13:04:01][TrackMonocular]: State= 1
+[13:04:01][processSLAM]: tracking_duration= 315
+
+
+[13:04:01][processSLAM]: ###############################################
+[13:04:01][processSLAM]: frame= 1362
+[13:04:01][GrabImageMonocular]: CLAHE_duration= 9
+[13:04:01][DrawTextInfo]: matches= 96
+[13:04:01][DrawTextInfo]: matches= 96
+[13:04:01][DrawTextInfo]: matches= 96
+[13:04:01][DrawTextInfo]: matches= 96
+[13:04:01][DrawTextInfo]: matches= 96
+[13:04:01][Frame]: features= 4006
+[13:04:01][GrabImageMonocular]: ORB_extraction_duration= 269
+[13:04:01][DrawTextInfo]: matches= 96
+[13:04:01][SearchForInitialization]: keypoints= 4006 level0= 3137
+[13:04:01][SearchForInitialization]: matches before rotation check = 94
+[13:04:01][SearchForInitialization]: matches after rotation check = 94
+[13:04:01][MonocularInitialization]: matches = 94
+[13:04:01][Initialize]: SH= 821.597 SF= 988.403 RH= 0.453921
+[13:04:01][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:04:01][ReconstructH]: CheckRT 	 nGood= 86 parallax= 0.478472
+[13:04:01][ReconstructH]: CheckRT 	 nGood= 68 parallax= 0.297394
+[13:04:01][ReconstructH]: CheckRT 	 nGood= 86 parallax= 2.01139
+[13:04:01][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:04:01][ReconstructH]: CheckRT 	 nGood= 2 parallax= 0.175829
+[13:04:01][ReconstructH]: CheckRT 	 nGood= 2 parallax= 0.175829
+[13:04:01][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:04:01][ReconstructH]: bestGood > mHomographyInlierWeight * N = 1
+[13:04:01][ReconstructH]: secondBestGood < mHomographySimilarityWeight * bestGood = 0
+[13:04:01][ReconstructH]: bestParallax >= minParallax = 0
+[13:04:01][ReconstructH]: bestGood > minTriangulated = 1
+[13:04:01][Track]: initialization_duration= 29
+[13:04:01][GrabImageMonocular]: tracking_duration= 29
+[13:04:01][TrackMonocular]: State= 1
+[13:04:01][processSLAM]: tracking_duration= 312
+
+
+[13:04:01][processSLAM]: ###############################################
+[13:04:01][processSLAM]: frame= 1363
+[13:04:01][GrabImageMonocular]: CLAHE_duration= 10
+[13:04:01][DrawTextInfo]: matches= 94
+[13:04:01][DrawTextInfo]: matches= 94
+[13:04:01][DrawTextInfo]: matches= 94
+[13:04:01][DrawTextInfo]: matches= 94
+[13:04:01][DrawTextInfo]: matches= 94
+[13:04:01][DrawTextInfo]: matches= 94
+[13:04:01][Frame]: features= 4006
+[13:04:01][GrabImageMonocular]: ORB_extraction_duration= 268
+[13:04:01][SearchForInitialization]: keypoints= 4006 level0= 3137
+[13:04:01][SearchForInitialization]: matches before rotation check = 101
+[13:04:01][SearchForInitialization]: matches after rotation check = 100
+[13:04:01][MonocularInitialization]: matches = 100
+[13:04:01][Initialize]: SH= 858.588 SF= 1064.76 RH= 0.446402
+[13:04:01][ReconstructH]: CheckRT 	 nGood= 92 parallax= 2.2614
+[13:04:01][ReconstructH]: CheckRT 	 nGood= 73 parallax= 0.298707
+[13:04:01][ReconstructH]: CheckRT 	 nGood= 92 parallax= 0.47519
+[13:04:01][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:04:01][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:04:01][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:04:01][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:04:01][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:04:01][ReconstructH]: bestGood > mHomographyInlierWeight * N = 1
+[13:04:01][ReconstructH]: secondBestGood < mHomographySimilarityWeight * bestGood = 0
+[13:04:01][ReconstructH]: bestParallax >= minParallax = 1
+[13:04:01][ReconstructH]: bestGood > minTriangulated = 1
+[13:04:01][Track]: initialization_duration= 29
+[13:04:01][GrabImageMonocular]: tracking_duration= 29
+[13:04:01][TrackMonocular]: State= 1
+[13:04:01][processSLAM]: tracking_duration= 312
+
+
+[13:04:01][processSLAM]: ###############################################
+[13:04:01][processSLAM]: frame= 1364
+[13:04:01][GrabImageMonocular]: CLAHE_duration= 9
+[13:04:01][DrawTextInfo]: matches= 100
+[13:04:01][DrawTextInfo]: matches= 100
+[13:04:01][DrawTextInfo]: matches= 100
+[13:04:01][DrawTextInfo]: matches= 100
+[13:04:01][DrawTextInfo]: matches= 100
+[13:04:01][DrawTextInfo]: matches= 100
+[13:04:01][Frame]: features= 4006
+[13:04:01][GrabImageMonocular]: ORB_extraction_duration= 275
+[13:04:01][SearchForInitialization]: keypoints= 4006 level0= 3137
+[13:04:01][SearchForInitialization]: matches before rotation check = 69
+[13:04:01][SearchForInitialization]: matches after rotation check = 67
+[13:04:01][MonocularInitialization]: matches = 67
+[13:04:01][DrawTextInfo]: matches= 100
+[13:04:01][Initialize]: SH= 550.207 SF= 700.013 RH= 0.440088
+[13:04:01][ReconstructH]: CheckRT 	 nGood= 58 parallax= 2.07603
+[13:04:02][ReconstructH]: CheckRT 	 nGood= 31 parallax= 0.265408
+[13:04:02][ReconstructH]: CheckRT 	 nGood= 58 parallax= 0.634273
+[13:04:02][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:04:02][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:04:02][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:04:02][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:04:02][ReconstructH]: CheckRT 	 nGood= 0 parallax= 0
+[13:04:02][ReconstructH]: bestGood > mHomographyInlierWeight * N = 1
+[13:04:02][ReconstructH]: secondBestGood < mHomographySimilarityWeight * bestGood = 1
+[13:04:02][ReconstructH]: bestParallax >= minParallax = 1
+[13:04:02][ReconstructH]: bestGood > minTriangulated = 1
+[13:04:02][MonocularInitialization]: SUCCSSEEDED initialization
+[13:04:02][DrawTextInfo]: matches= 100
+New Map created with 58 points
+[13:04:02][Track]: initialization_duration= 74
+[13:04:02][GrabImageMonocular]: tracking_duration= 75
+[13:04:02][TrackMonocular]: State= 2
+[13:04:02][processSLAM]: tracking_duration= 363
+
+
+[13:04:02][processSLAM]: ###############################################
+[13:04:02][processSLAM]: frame= 1365
+[13:04:02][GrabImageMonocular]: CLAHE_duration= 11
+[13:04:02][DrawTextInfo]: matches= 58
+[13:04:02][Run]: local_mapping_duration= 52
+[13:04:02][Run]: local_mapping_duration= 18
+[13:04:02][Run]: loop_closure_duration= 0
+[13:04:02][DrawTextInfo]: matches= 58
+[13:04:02][DrawTextInfo]: matches= 58
+[13:04:02][DrawTextInfo]: matches= 58
+[13:04:02][DrawTextInfo]: matches= 58
+[13:04:02][Frame]: features= 2002
+[13:04:02][GrabImageMonocular]: ORB_extraction_duration= 258
+[13:04:02][DrawTextInfo]: matches= 58
+[13:04:02][GrabImageMonocular]: tracking_duration= 16
+[13:04:02][TrackMonocular]: State= 2
+[13:04:02][processSLAM]: tracking_duration= 291
+
+
+[13:04:02][processSLAM]: ###############################################
+[13:04:02][processSLAM]: frame= 1366
+[13:04:02][GrabImageMonocular]: CLAHE_duration= 11
+[13:04:02][DrawTextInfo]: matches= 173
+[13:04:02][Run]: local_mapping_duration= 77
+[13:04:02][Run]: loop_closure_duration= 0
+[13:04:02][DrawTextInfo]: matches= 173
+[13:04:02][DrawTextInfo]: matches= 173
+[13:04:02][DrawTextInfo]: matches= 173
+[13:04:02][DrawTextInfo]: matches= 173
+[13:04:02][Frame]: features= 2002
+[13:04:02][GrabImageMonocular]: ORB_extraction_duration= 247
+[13:04:02][GrabImageMonocular]: tracking_duration= 4
+[13:04:02][TrackMonocular]: State= 2
+[13:04:02][processSLAM]: tracking_duration= 267
+
+
+[13:04:02][processSLAM]: ###############################################
+[13:04:02][processSLAM]: frame= 1367
+[13:04:02][GrabImageMonocular]: CLAHE_duration= 10
+[13:04:02][DrawTextInfo]: matches= 209
+[13:04:02][DrawTextInfo]: matches= 209
+[13:04:02][DrawTextInfo]: matches= 209
+[13:04:02][DrawTextInfo]: matches= 209
+[13:04:02][DrawTextInfo]: matches= 209
+[13:04:02][Frame]: features= 2002
+[13:04:02][GrabImageMonocular]: ORB_extraction_duration= 230
+[13:04:02][GrabImageMonocular]: tracking_duration= 5
+[13:04:02][TrackMonocular]: State= 2
+[13:04:02][processSLAM]: tracking_duration= 250
+
+
+[13:04:02][processSLAM]: ###############################################
+[13:04:02][processSLAM]: frame= 1368
+[13:04:02][GrabImageMonocular]: CLAHE_duration= 11
+[13:04:02][DrawTextInfo]: matches= 198
+[13:04:02][DrawTextInfo]: matches= 198
+[13:04:02][DrawTextInfo]: matches= 198
+[13:04:03][DrawTextInfo]: matches= 198
+[13:04:03][DrawTextInfo]: matches= 198
+[13:04:03][Frame]: features= 2002
+[13:04:03][GrabImageMonocular]: ORB_extraction_duration= 235
+[13:04:03][GrabImageMonocular]: tracking_duration= 4
+[13:04:03][TrackMonocular]: State= 2
+[13:04:03][processSLAM]: tracking_duration= 255
+
+
+[13:04:03][processSLAM]: ###############################################
+[13:04:03][processSLAM]: frame= 1369
+[13:04:03][GrabImageMonocular]: CLAHE_duration= 12
+[13:04:03][DrawTextInfo]: matches= 169
+[13:04:03][DrawTextInfo]: matches= 169
+[13:04:03][Run]: local_mapping_duration= 96
+[13:04:03][Run]: loop_closure_duration= 0
+[13:04:03][DrawTextInfo]: matches= 169
+[13:04:03][DrawTextInfo]: matches= 169
+[13:04:03][DrawTextInfo]: matches= 169
+[13:04:03][Frame]: features= 2002
+[13:04:03][GrabImageMonocular]: ORB_extraction_duration= 254
+[13:04:03][DrawTextInfo]: matches= 169
+[13:04:03][GrabImageMonocular]: tracking_duration= 9
+[13:04:03][TrackMonocular]: State= 2
+[13:04:03][processSLAM]: tracking_duration= 280
+
+
+[13:04:03][processSLAM]: ###############################################
+[13:04:03][processSLAM]: frame= 1370
+[13:04:03][GrabImageMonocular]: CLAHE_duration= 16
+[13:04:03][DrawTextInfo]: matches= 227
+[13:04:03][DrawTextInfo]: matches= 227
+[13:04:03][Run]: local_mapping_duration= 149
+[13:04:03][Run]: loop_closure_duration= 0
+[13:04:03][DrawTextInfo]: matches= 227
+[13:04:03][DrawTextInfo]: matches= 227
+[13:04:03][DrawTextInfo]: matches= 227
+[13:04:03][DrawTextInfo]: matches= 227
+[13:04:03][Frame]: features= 2002
+[13:04:03][GrabImageMonocular]: ORB_extraction_duration= 288
+[13:04:03][GrabImageMonocular]: tracking_duration= 6
+[13:04:03][TrackMonocular]: State= 2
+[13:04:03][processSLAM]: tracking_duration= 316
+
+
+[13:04:03][processSLAM]: ###############################################
+[13:04:03][processSLAM]: frame= 1371
+[13:04:03][GrabImageMonocular]: CLAHE_duration= 9
+[13:04:03][DrawTextInfo]: matches= 278
+[13:04:03][DrawTextInfo]: matches= 278
+[13:04:03][DrawTextInfo]: matches= 278
+[13:04:03][DrawTextInfo]: matches= 278
+[13:04:03][DrawTextInfo]: matches= 278
+[13:04:04][Frame]: features= 2002
+[13:04:04][GrabImageMonocular]: ORB_extraction_duration= 248
+[13:04:04][GrabImageMonocular]: tracking_duration= 10
+[13:04:04][TrackMonocular]: State= 2
+[13:04:04][processSLAM]: tracking_duration= 272
+
+
+[13:04:04][processSLAM]: ###############################################
+[13:04:04][processSLAM]: frame= 1372
+[13:04:04][DrawTextInfo]: matches= 278
+[13:04:04][GrabImageMonocular]: CLAHE_duration= 10
+[13:04:04][DrawTextInfo]: matches= 252
+[13:04:04][DrawTextInfo]: matches= 252
+[13:04:04][Run]: local_mapping_duration= 151
+[13:04:04][Run]: loop_closure_duration= 0
+[13:04:04][DrawTextInfo]: matches= 252
+[13:04:04][DrawTextInfo]: matches= 252
+[13:04:04][DrawTextInfo]: matches= 252
+[13:04:04][Frame]: features= 2002
+[13:04:04][GrabImageMonocular]: ORB_extraction_duration= 243
+[13:04:04][GrabImageMonocular]: tracking_duration= 8
+[13:04:04][TrackMonocular]: State= 2
+[13:04:04][processSLAM]: tracking_duration= 268
+
+
+[13:04:04][processSLAM]: ###############################################
+[13:04:04][processSLAM]: frame= 1373
+[13:04:04][GrabImageMonocular]: CLAHE_duration= 10
+[13:04:04][DrawTextInfo]: matches= 340
+[13:04:04][DrawTextInfo]: matches= 340
+[13:04:04][DrawTextInfo]: matches= 340
+[13:04:04][DrawTextInfo]: matches= 340
+[13:04:04][DrawTextInfo]: matches= 340
+[13:04:04][DrawTextInfo]: matches= 340
+[13:04:04][DrawTextInfo]: matches= 340
+[13:04:04][Frame]: features= 2002
+[13:04:04][GrabImageMonocular]: ORB_extraction_duration= 384
+[13:04:04][GrabImageMonocular]: tracking_duration= 12
+[13:04:04][TrackMonocular]: State= 2
+[13:04:04][processSLAM]: tracking_duration= 411
+
+
+[13:04:04][processSLAM]: ###############################################
+[13:04:04][processSLAM]: frame= 1374
+[13:04:04][GrabImageMonocular]: CLAHE_duration= 18
+[13:04:04][DrawTextInfo]: matches= 316
+[13:04:04][DrawTextInfo]: matches= 316
+[13:04:04][DrawTextInfo]: matches= 316
+[13:04:04][DrawTextInfo]: matches= 316
+[13:04:04][DrawTextInfo]: matches= 316
+[13:04:05][Run]: local_mapping_duration= 314
+[13:04:05][Run]: loop_closure_duration= 0
+[13:04:05][DrawTextInfo]: matches= 316
+[13:04:05][DrawTextInfo]: matches= 316
+[13:04:05][Frame]: features= 2002
+[13:04:05][GrabImageMonocular]: ORB_extraction_duration= 381
+[13:04:05][GrabImageMonocular]: tracking_duration= 15
+[13:04:05][TrackMonocular]: State= 2
+[13:04:05][processSLAM]: tracking_duration= 420
+
+
+[13:04:05][processSLAM]: ###############################################
+[13:04:05][processSLAM]: frame= 1375
+[13:04:05][GrabImageMonocular]: CLAHE_duration= 21
+[13:04:05][DrawTextInfo]: matches= 379
+[13:04:05][DrawTextInfo]: matches= 379
+[13:04:05][DrawTextInfo]: matches= 379
+[13:04:05][DrawTextInfo]: matches= 379
+[13:04:05][DrawTextInfo]: matches= 379
+[13:04:05][DrawTextInfo]: matches= 379
+[13:04:05][DrawTextInfo]: matches= 379
+[13:04:05][Run]: local_mapping_duration= 441
+[13:04:05][Run]: loop_closure_duration= 0
+[13:04:05][Frame]: features= 2002
+[13:04:05][GrabImageMonocular]: ORB_extraction_duration= 451
+[13:04:05][DrawTextInfo]: matches= 379
+[13:04:05][GrabImageMonocular]: tracking_duration= 21
+[13:04:05][TrackMonocular]: State= 2
+[13:04:05][processSLAM]: tracking_duration= 500
+
+
+[13:04:05][processSLAM]: ###############################################
+[13:04:05][processSLAM]: frame= 1376
+[13:04:05][GrabImageMonocular]: CLAHE_duration= 15
+[13:04:05][DrawTextInfo]: matches= 376
+[13:04:05][DrawTextInfo]: matches= 376
+[13:04:05][DrawTextInfo]: matches= 376
+[13:04:05][DrawTextInfo]: matches= 376
+[13:04:05][DrawTextInfo]: matches= 376
+[13:04:05][Run]: local_mapping_duration= 359
+[13:04:06][Run]: loop_closure_duration= 0
+[13:04:06][DrawTextInfo]: matches= 376
+[13:04:06][Frame]: features= 2002
+[13:04:06][GrabImageMonocular]: ORB_extraction_duration= 384
+[13:04:06][DrawTextInfo]: matches= 376
+[13:04:06][GrabImageMonocular]: tracking_duration= 21
+[13:04:06][TrackMonocular]: State= 2
+[13:04:06][processSLAM]: tracking_duration= 428
+
+
+[13:04:06][processSLAM]: ###############################################
+[13:04:06][processSLAM]: frame= 1377
+[13:04:06][GrabImageMonocular]: CLAHE_duration= 16
+[13:04:06][DrawTextInfo]: matches= 449
+[13:04:06][DrawTextInfo]: matches= 449
+[13:04:06][DrawTextInfo]: matches= 449
+[13:04:06][DrawTextInfo]: matches= 449
+[13:04:06][DrawTextInfo]: matches= 449
+[13:04:06][DrawTextInfo]: matches= 449
+[13:04:06][Frame]: features= 2002
+[13:04:06][GrabImageMonocular]: ORB_extraction_duration= 359
+[13:04:06][GrabImageMonocular]: tracking_duration= 22
+[13:04:06][TrackMonocular]: State= 2
+[13:04:06][processSLAM]: tracking_duration= 405
+
+
+[13:04:06][processSLAM]: ###############################################
+[13:04:06][processSLAM]: frame= 1378
+[13:04:06][DrawTextInfo]: matches= 449
+[13:04:06][GrabImageMonocular]: CLAHE_duration= 25
+[13:04:06][DrawTextInfo]: matches= 431
+[13:04:06][DrawTextInfo]: matches= 431
+[13:04:06][DrawTextInfo]: matches= 431
+[13:04:06][DrawTextInfo]: matches= 431
+[13:04:06][DrawTextInfo]: matches= 431
+[13:04:06][DrawTextInfo]: matches= 431
+[13:04:06][DrawTextInfo]: matches= 431
+[13:04:06][Frame]: features= 2002
+[13:04:06][GrabImageMonocular]: ORB_extraction_duration= 375
+[13:04:06][GrabImageMonocular]: tracking_duration= 17
+[13:04:06][TrackMonocular]: State= 2
+[13:04:06][processSLAM]: tracking_duration= 430
+
+
+[13:04:06][processSLAM]: ###############################################
+[13:04:06][processSLAM]: frame= 1379
+[13:04:06][GrabImageMonocular]: CLAHE_duration= 15
+[13:04:06][DrawTextInfo]: matches= 430
+[13:04:07][DrawTextInfo]: matches= 430
+[13:04:07][DrawTextInfo]: matches= 430
+[13:04:07][DrawTextInfo]: matches= 430
+[13:04:07][DrawTextInfo]: matches= 430
+[13:04:07][DrawTextInfo]: matches= 430
+[13:04:07][Run]: local_mapping_duration= 388
+[13:04:07][Run]: loop_closure_duration= 0
+[13:04:07][DrawTextInfo]: matches= 430
+[13:04:07][Frame]: features= 2002
+[13:04:07][GrabImageMonocular]: ORB_extraction_duration= 436
+[13:04:07][DrawTextInfo]: matches= 430
+[13:04:07][GrabImageMonocular]: tracking_duration= 29
+[13:04:07][TrackMonocular]: State= 2
+[13:04:07][processSLAM]: tracking_duration= 486
+
+
+[13:04:07][processSLAM]: ###############################################
+[13:04:07][processSLAM]: frame= 1380
+[13:04:07][DrawTextInfo]: matches= 446
+[13:04:07][GrabImageMonocular]: CLAHE_duration= 58
+[13:04:07][DrawTextInfo]: matches= 446
+[13:04:07][DrawTextInfo]: matches= 446
+[13:04:07][DrawTextInfo]: matches= 446
+[13:04:07][DrawTextInfo]: matches= 446
+[13:04:07][DrawTextInfo]: matches= 446
+[13:04:07][DrawTextInfo]: matches= 446
+[13:04:07][Run]: local_mapping_duration= 474
+[13:04:07][Run]: loop_closure_duration= 3
+[13:04:07][Frame]: features= 2002
+[13:04:07][GrabImageMonocular]: ORB_extraction_duration= 425
+[13:04:07][DrawTextInfo]: matches= 446
+[13:04:07][GrabImageMonocular]: tracking_duration= 26
+[13:04:07][TrackMonocular]: State= 2
+[13:04:07][processSLAM]: tracking_duration= 517
+
+
+[13:04:07][processSLAM]: ###############################################
+[13:04:07][processSLAM]: frame= 1381
+[13:04:07][GrabImageMonocular]: CLAHE_duration= 16
+[13:04:08][DrawTextInfo]: matches= 426
+[13:04:08][DrawTextInfo]: matches= 426
+[13:04:08][DrawTextInfo]: matches= 426
+[13:04:08][DrawTextInfo]: matches= 426
+[13:04:08][DrawTextInfo]: matches= 426
+[13:04:08][DrawTextInfo]: matches= 426
+[13:04:08][DrawTextInfo]: matches= 426
+[13:04:08][DrawTextInfo]: matches= 426

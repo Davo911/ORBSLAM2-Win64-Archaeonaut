@@ -24,6 +24,7 @@
 
 #include<opencv2/core/core.hpp>
 #include<opencv2/features2d/features2d.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
 
 #include"Viewer.h"
 #include"FrameDrawer.h"
@@ -55,7 +56,7 @@ class Tracking
 
 public:
     Tracking(System* pSys, ORBVocabulary* pVoc, FrameDrawer* pFrameDrawer, MapDrawer* pMapDrawer, Map* pMap,
-             KeyFrameDatabase* pKFDB, const string &strSettingPath, const int sensor);
+             KeyFrameDatabase* pKFDB, const int sensor);
 
     // Preprocess the input and call Track(). Extract features and performs stereo matching.
     cv::Mat GrabImageStereo(const cv::Mat &imRectLeft,const cv::Mat &imRectRight, const double &timestamp);
@@ -197,9 +198,21 @@ protected:
 
     // For RGB-D inputs only. For some datasets (e.g. TUM) the depthmap values are scaled.
     float mDepthMapFactor;
+    
+    // minimal number of key points (from settings file)
+    int mMinKeyPoints;
+    
+    // minimal number of matches (from settings file)
+    int mMinMatches;
+    
+    // minimal number of tracked map points (from settings file)
+    int mMinTrackedMapPoints;
 
     //Current matches in frame
     int mnMatchesInliers;
+    
+    // (from settings file)
+    float mImageScaleFactor;
 
     //Last Frame, KeyFrame and Relocalisation Info
     KeyFrame* mpLastKeyFrame;
@@ -214,6 +227,15 @@ protected:
     bool mbRGB;
 
     list<MapPoint*> mlpTemporalPoints;
+    
+    bool mEnableCLAHE;
+    cv::Ptr<cv::CLAHE> mCLAHE;
+    double mCLAHElimit;
+    
+    //
+    bool mEnableCyclivBundleAdjustment;
+    int mBundleAdjustmentCycle;
+    unsigned long mLastBundleAdjustmentID;
 };
 
 } //namespace ORB_SLAM

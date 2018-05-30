@@ -24,6 +24,11 @@
 #include "Tracking.h"
 #include "MapPoint.h"
 #include "Map.h"
+#include "System.h"
+#include "MapDrawer.h"
+#include "Tracking.h"
+#include "opencv2/opencv.hpp"
+
 
 #include<opencv2/core/core.hpp>
 #include<opencv2/features2d/features2d.hpp>
@@ -36,17 +41,17 @@ namespace ORB_SLAM2
 
 class Tracking;
 class Viewer;
-
+class System;
 class FrameDrawer
 {
 public:
     FrameDrawer(Map* pMap);
-
+    void UpdateFPS(double fps);
     // Update info from the last processed frame.
     void Update(Tracking *pTracker);
-
+    double fps;
     // Draw last processed frame.
-    cv::Mat DrawFrame();
+    cv::Mat DrawFrame(float width, float height, bool shoeKeypoints);
 
 protected:
 
@@ -55,6 +60,8 @@ protected:
     // Info of the frame to be drawn
     cv::Mat mIm;
     int N;
+
+    int mMatchedKpCount;
     vector<cv::KeyPoint> mvCurrentKeys;
     vector<bool> mvbMap, mvbVO;
     bool mbOnlyTracking;
@@ -64,7 +71,8 @@ protected:
     int mState;
 
     Map* mpMap;
-
+    System* mpSystem;
+    
     std::mutex mMutex;
 };
 

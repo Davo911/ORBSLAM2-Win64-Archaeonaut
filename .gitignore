@@ -1,4 +1,4 @@
-/build
-/win/DBoW2/build
-/win/g2o/build
-/win/Pangolin/build
+/build/*
+Thirdparty/win/DBoW2/build/*
+Thirdparty/win/g2o/build/*
+Thirdparty/win/Pangolin/build/*

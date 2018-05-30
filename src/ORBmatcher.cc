@@ -19,15 +19,20 @@
 */
 
 #include "ORBmatcher.h"
-
-#include<limits.h>
-
-#include<opencv2/core/core.hpp>
-#include<opencv2/features2d/features2d.hpp>
-
+#include "Log.h"
+#include <limits.h>
+#include <opencv2/core/core.hpp>
+#include <opencv2/features2d/features2d.hpp>
+#ifdef __APPLE__
+#include "Thirdparty/macOS/DBoW2/DBoW2/FeatureVector.h"
+#include <stdint.h>
+#elif _WIN32
 #include "Thirdparty/win/DBoW2/DBoW2/FeatureVector.h"
-
-#include<stdint.h>
+#include <stdint.h>
+#elif __linux__ 
+#include "Thirdparty/win/DBoW2/DBoW2/FeatureVector.h"
+#include <stdint-gcc.h>
+#endif
 
 using namespace std;
 
@@ -415,13 +420,15 @@ int ORBmatcher::SearchForInitialization(Frame &F1, Frame &F2, vector<cv::Point2f
     vector<int> vMatchedDistance(F2.mvKeysUn.size(),INT_MAX);
     vector<int> vnMatches21(F2.mvKeysUn.size(),-1);
 
+    auto level0Counter = 0;
     for(size_t i1=0, iend1=F1.mvKeysUn.size(); i1<iend1; i1++)
     {
         cv::KeyPoint kp1 = F1.mvKeysUn[i1];
         int level1 = kp1.octave;
-        if(level1>0)
+        if (level1>0) {
+            level0Counter++;
             continue;
-
+        }
         vector<size_t> vIndices2 = F2.GetFeaturesInArea(vbPrevMatched[i1].x,vbPrevMatched[i1].y, windowSize,level1,level1);
 
         if(vIndices2.empty())
@@ -485,7 +492,10 @@ int ORBmatcher::SearchForInitialization(Frame &F1, Frame &F2, vector<cv::Point2f
         }
 
     }
-
+    
+    Log::write(__FUNCTION__, "keypoints=", F1.mvKeysUn.size(), "level0=", level0Counter);
+    Log::write(__FUNCTION__, "matches before rotation check =", nmatches);
+    
     if(mbCheckOrientation)
     {
         int ind1=-1;
@@ -515,7 +525,9 @@ int ORBmatcher::SearchForInitialization(Frame &F1, Frame &F2, vector<cv::Point2f
     for(size_t i1=0, iend1=vnMatches12.size(); i1<iend1; i1++)
         if(vnMatches12[i1]>=0)
             vbPrevMatched[i1]=F2.mvKeysUn[vnMatches12[i1]].pt;
-
+    
+    Log::write(__FUNCTION__, "matches after rotation check =", nmatches);
+    
     return nmatches;
 }
 

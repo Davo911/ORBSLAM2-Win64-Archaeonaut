@@ -1,6 +1,7 @@
 # ORB_SLAM2_Windows
 
  Built using CMAKE GUI 3.11 + OpenCV 3.4.1 + Visual Studio 2017 on Windows 10 x64
+ 
 1. DBoW2 --- Config/Generate
 - !Release!
 - DBoW2 project -> Properties -> General: Target Extension = .lib + Configuration Type = Static Library (.lib)

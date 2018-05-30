@@ -26,7 +26,7 @@
 #include "MapDrawer.h"
 #include "Tracking.h"
 #include "System.h"
-
+#include "opencv2/opencv.hpp"
 #include <mutex>
 
 namespace ORB_SLAM2
@@ -40,12 +40,14 @@ class System;
 class Viewer
 {
 public:
-    Viewer(System* pSystem, FrameDrawer* pFrameDrawer, MapDrawer* pMapDrawer, Tracking *pTracking, const string &strSettingPath);
+    Viewer(System* pSystem, FrameDrawer* pFrameDrawer, MapDrawer* pMapDrawer, Tracking *pTracking);
+    Viewer(System* pSystem, FrameDrawer* pFrameDrawer, MapDrawer* pMapDrawer, Tracking *pTracking, const string &strSettingPath); //# siehe Funktion
+
 
     // Main thread function. Draw points, keyframes, the current camera pose and the last processed
     // frame. Drawing is refreshed according to the camera fps. We use Pangolin.
     void Run();
-
+    bool init;
     void RequestFinish();
 
     void RequestStop();
@@ -64,11 +66,21 @@ private:
     FrameDrawer* mpFrameDrawer;
     MapDrawer* mpMapDrawer;
     Tracking* mpTracker;
-
+    cv::VideoWriter videoKey;
     // 1/fps in ms
     double mT;
+    
+    // (from settings file)
     float mImageWidth, mImageHeight;
-
+    int mImagePosX, mImagePosY;
+    
+    // (from settings file)
+    float mMapViewerWidth, mMapViewerHeight;
+    
+    // (from settings file)
+    bool mShowImage;
+    
+    // (from settings file)
     float mViewpointX, mViewpointY, mViewpointZ, mViewpointF;
 
     bool CheckFinish();
@@ -80,7 +92,6 @@ private:
     bool mbStopped;
     bool mbStopRequested;
     std::mutex mMutexStop;
-
 };
 
 }

@@ -21,6 +21,7 @@
 #include "MapDrawer.h"
 #include "MapPoint.h"
 #include "KeyFrame.h"
+#include "Settings.h"
 //#include <pangolin/pangolin.h>
 #include <mutex>
 
@@ -28,17 +29,14 @@ namespace ORB_SLAM2
 {
 
 
-MapDrawer::MapDrawer(Map* pMap, const string &strSettingPath):mpMap(pMap)
-{
-    cv::FileStorage fSettings(strSettingPath, cv::FileStorage::READ);
-
-    mKeyFrameSize = fSettings["Viewer.KeyFrameSize"];
-    mKeyFrameLineWidth = fSettings["Viewer.KeyFrameLineWidth"];
-    mGraphLineWidth = fSettings["Viewer.GraphLineWidth"];
-    mPointSize = fSettings["Viewer.PointSize"];
-    mCameraSize = fSettings["Viewer.CameraSize"];
-    mCameraLineWidth = fSettings["Viewer.CameraLineWidth"];
-
+MapDrawer::MapDrawer(Map* pMap):mpMap(pMap) {
+    cv::FileStorage fSettings(Settings::path, cv::FileStorage::READ);
+    mKeyFrameSize =      (0.f == static_cast<float>(fSettings["Viewer.KeyFrameSize"]))      ?  0.1f : fSettings["Viewer.KeyFrameSize"];
+    mKeyFrameLineWidth = (0.f == static_cast<float>(fSettings["Viewer.KeyFrameLineWidth"])) ? 1.f   : fSettings["Viewer.KeyFrameLineWidth"];
+    mGraphLineWidth =    (0.f == static_cast<float>(fSettings["Viewer.GraphLineWidth"]))    ? 1.f   : fSettings["Viewer.GraphLineWidth"];
+    mPointSize =         (0.f == static_cast<float>(fSettings["Viewer.PointSize"]))         ? 2.f   : fSettings["Viewer.PointSize"];
+    mCameraSize =        (0.f == static_cast<float>(fSettings["Viewer.CameraSize"]))        ? 0.15f : fSettings["Viewer.CameraSize"];
+    mCameraLineWidth =   (0.f == static_cast<float>(fSettings["Viewer.CameraLineWidth"]))   ? 2.f   : fSettings["Viewer.CameraLineWidth"];
 }
 
 void MapDrawer::DrawMapPoints()

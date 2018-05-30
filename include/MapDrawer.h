@@ -34,7 +34,7 @@ namespace ORB_SLAM2
 class MapDrawer
 {
 public:
-    MapDrawer(Map* pMap, const string &strSettingPath);
+    MapDrawer(Map* pMap);
 
     Map* mpMap;
 
@@ -47,6 +47,7 @@ public:
 
 private:
 
+    // (from settings file)
     float mKeyFrameSize;
     float mKeyFrameLineWidth;
     float mGraphLineWidth;

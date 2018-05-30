@@ -24,8 +24,17 @@
 #include<vector>
 
 #include "MapPoint.h"
+#ifdef __APPLE__
+#include "Thirdparty/macOS/DBoW2/DBoW2/BowVector.h"
+#include "Thirdparty/macOS/DBoW2/DBoW2/FeatureVector.h"
+#elif _WIN32
 #include "Thirdparty/win/DBoW2/DBoW2/BowVector.h"
 #include "Thirdparty/win/DBoW2/DBoW2/FeatureVector.h"
+#elif __linux__ 
+#include "Thirdparty/linux/DBoW2/DBoW2/BowVector.h"
+#include "Thirdparty/linux/DBoW2/DBoW2/FeatureVector.h"
+
+#endif
 #include "ORBVocabulary.h"
 #include "KeyFrame.h"
 #include "ORBextractor.h"
@@ -72,6 +81,10 @@ public:
     // Returns the camera center.
     inline cv::Mat GetCameraCenter(){
         return mOw.clone();
+    }
+    
+    inline cv::Mat GetRotation() {
+        return mRcw.clone();
     }
 
     // Returns inverse of rotation
