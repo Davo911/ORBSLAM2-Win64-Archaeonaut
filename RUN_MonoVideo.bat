@@ -1,0 +1,1 @@
+.\Examples\Release\mono_video.exe -o=".\data\ORBvoc.bin" -c=".\data\mondsee_432x240.yaml" -f="C:\Users\David\Documents\GitHub\ORBSLAM2-Win64-Archaeonaut\export\log.log" -v="C:\Users\David\Desktop\MOV_0143_dunkel.mp4"

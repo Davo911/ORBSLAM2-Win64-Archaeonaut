@@ -2,6 +2,11 @@
 
  Built using CMAKE GUI 3.11 + OpenCV 3.4.1 + Visual Studio 2017 on Windows 10 x64
  
+ Required:
+ CMake
+ OpenCV :  https://github.com/opencv/opencv/releases
+ +contrib: https://github.com/opencv/opencv_contrib/releases
+ Openh264: https://github.com/cisco/openh264/releases
 1. DBoW2 --- Config/Generate
 - !Release!
 - DBoW2 project -> Properties -> General: Target Extension = .lib + Configuration Type = Static Library (.lib)

@@ -19,23 +19,23 @@
 */
 
 
+#include "Tracking.h"
 
 #include <opencv2/core/core.hpp>
 #include <opencv2/features2d/features2d.hpp>
 
-#include "Tracking.h"
 #include "ORBmatcher.h"
 #include "FrameDrawer.h"
 #include "Converter.h"
 #include "Map.h"
 #include "Initializer.h"
+
 #include "Settings.h"
 #include "Optimizer.h"
 #include "PnPsolver.h"
 #include "Log.h"
 
 #include <iostream>
-//#include <unistd.h>
 #include <mutex>
 #include <chrono>
 

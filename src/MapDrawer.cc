@@ -22,7 +22,7 @@
 #include "MapPoint.h"
 #include "KeyFrame.h"
 #include "Settings.h"
-//#include <pangolin/pangolin.h>
+#include <pangolin/pangolin.h>
 #include <mutex>
 
 namespace ORB_SLAM2

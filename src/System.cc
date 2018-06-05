@@ -29,6 +29,10 @@
 #include <thread>
 #include <pangolin/pangolin.h>
 #include <iomanip>
+#include <time.h>
+
+
+
 
 void usleep(__int64 usec)
 {
@@ -67,11 +71,11 @@ namespace ORB_SLAM2
         mpVocabulary = new ORBVocabulary();
         auto bVocLoad = false;
         if (index != std::string::npos) {
-            bVocLoad = mpVocabulary->loadFromTextFile(strVocFile);
-            //# bVocLoad = mpVocabulary->loadFromBinaryFile(strVocFile);
+            //bVocLoad = mpVocabulary->loadFromTextFile(strVocFile);
+            bVocLoad = mpVocabulary->loadFromBinaryFile(strVocFile);
         } else {
-			 bVocLoad = mpVocabulary->loadFromTextFile(strVocFile);
-			 //# bVocLoad = mpVocabulary->loadFromBinaryFile(strVocFile);
+			      //bVocLoad = mpVocabulary->loadFromTextFile(strVocFile);
+			      bVocLoad = mpVocabulary->loadFromBinaryFile(strVocFile);
         }
 
         if(!bVocLoad) {
@@ -147,8 +151,8 @@ namespace ORB_SLAM2
                 // Wait until Local Mapping has effectively stopped
                 while(!mpLocalMapper->isStopped())
                 {
-                    //usleep(1000);
-					std::this_thread::sleep_for(std::chrono::milliseconds(1));
+                    usleep(1000);
+					//std::this_thread::sleep_for(std::chrono::milliseconds(1));
                 }
 
                 mpTracker->InformOnlyTracking(true);
@@ -201,8 +205,8 @@ namespace ORB_SLAM2
                 // Wait until Local Mapping has effectively stopped
                 while(!mpLocalMapper->isStopped())
                 {
-                    //usleep(1000);
-					std::this_thread::sleep_for(std::chrono::milliseconds(1));
+                   usleep(1000);
+					        //std::this_thread::sleep_for(std::chrono::milliseconds(1));
                 }
 
                 mpTracker->InformOnlyTracking(true);
@@ -257,8 +261,8 @@ namespace ORB_SLAM2
                 // Wait until Local Mapping has effectively stopped
                 while(!mpLocalMapper->isStopped())
                 {
-                    //usleep(1000);
-					std::this_thread::sleep_for(std::chrono::milliseconds(1));
+                  usleep(1000);
+					        //std::this_thread::sleep_for(std::chrono::milliseconds(1));
                 }
 
                 mpTracker->InformOnlyTracking(true);
@@ -343,8 +347,8 @@ namespace ORB_SLAM2
         {
             mpViewer->RequestFinish();
             while(!mpViewer->isFinished())
-                //usleep(5000);
-				std::this_thread::sleep_for(std::chrono::milliseconds(5));
+            usleep(5000);
+				    //std::this_thread::sleep_for(std::chrono::milliseconds(5));
         }
         
       //#  if (mpDatatransfer) {
@@ -356,8 +360,8 @@ namespace ORB_SLAM2
         // Wait until all thread have effectively stopped
         while(!mpLocalMapper->isFinished() || !mpLoopCloser->isFinished() || mpLoopCloser->isRunningGBA())
         {
-            //usleep(5000);
-			std::this_thread::sleep_for(std::chrono::milliseconds(5));
+          usleep(5000);
+			    //std::this_thread::sleep_for(std::chrono::milliseconds(5));
         }
 
         if(mpViewer)

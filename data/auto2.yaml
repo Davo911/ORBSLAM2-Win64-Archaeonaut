@@ -1,0 +1,186 @@
+%YAML:1.0
+
+#--------------------------------------------------------------------------------------------
+# Camera Parameters. Adjust them!
+#--------------------------------------------------------------------------------------------
+
+# Camera calibration and distortion parameters (OpenCV) 
+#Camera.fx: 2443.4551893961347
+#Camera.fy: 2443.4551893961347
+#Camera.cx: 1954.36124460123689
+#Camera.cy: 1073.31701467252471
+
+Camera.fx: 610.57990883958018
+Camera.fy: 610.57990883958018
+Camera.cx: 488.54494046901590
+Camera.cy: 268.25907514263162
+
+#Camera.fx: 1221.7275943961347
+#Camera.fy: 1221.7275943961347
+#Camera.cx: 977.18062230123689
+#Camera.cy: 536.65850767252471
+
+#Camera.k1: -0.17309939545328373
+#Camera.k2: 0.38346003649550708
+#Camera.p1: -0.00086697479470492379
+#Camera.p2: -0.0038618521555845433
+
+Camera.k1: 0
+Camera.k2: 0
+Camera.p1: 0
+Camera.p2: 0
+
+# Camera frames per second 
+Camera.fps: 30.0
+
+# Color order of the images (0: BGR, 1: RGB. It is ignored if images are grayscale)
+Camera.RGB: 0
+
+
+
+
+#--------------------------------------------------------------------------------------------
+# ORB Parameters
+#--------------------------------------------------------------------------------------------
+
+# ORB Extractor: Number of features per image (default: 2000)
+ORBextractor.nFeatures: 2000
+
+# ORB Extractor: Scale factor between levels in the scale pyramid (default: 1.2)
+ORBextractor.scaleFactor: 1.2
+
+# ORB Extractor: Number of levels in the scale pyramid (default: 8)
+ORBextractor.nLevels: 8
+
+# ORB Extractor: Fast threshold
+# Image is divided in a grid. At each cell FAST are extracted imposing a minimum response.
+# Firstly we impose iniThFAST. If no corners are detected we impose a lower value minThFAST
+# You can lower these values if your images have low contrast	(default: 20 , 7)		
+ORBextractor.iniThFAST: 4
+ORBextractor.minThFAST: 2
+
+
+
+#--------------------------------------------------------------------------------------------
+# Tracking Parameters
+#--------------------------------------------------------------------------------------------
+
+# minimal number of key points (default: 100)
+Tracking.minKeyPoints: 100
+
+# minimal number of matches between frames (default: 100)
+Tracking.minMatches: 10
+
+# minimal number of tracked map points (default: 100)
+Tracking.minTrackedMapPoints: 10
+
+# scale factor for input image to reduce computation time (default: 1)
+# If you set scale factor make sure to update camera calibration parameters according to
+# new image size!
+Tracking.ImageScaleFactor: 0.25
+
+# Turn on or off image optimizations (0: no, 1: yes)
+Tracking.enableCLAHE: 1
+
+# histogram contrast threshold (default: 4.0)
+Tracking.CLAHElimit: 3.0
+
+# run bundle adjustment after a certain amount of inserted key frames (0: no, 1: yes)
+Tracking.enableCyclicBundleAdjustment: 1
+
+# number of key frames passed befor global bundle adjustment is triggered (default: 50)
+Tracking.BundleAdjustmentCycle: 1
+
+#--------------------------------------------------------------------------------------------
+# Initializer Parameters
+#--------------------------------------------------------------------------------------------
+
+# (default: 1.0)
+Initializer.sigma: 1.0
+
+# RANSAC iterations (default: 200)
+Initializer.iterations: 200
+
+# SH/(SH+SF) SH: Homography score SF: Fundamental score (default: 0.40)
+Initializer.ratioScoreThreshold: 0.40
+
+# minimum of triangulated points (default: 50)
+Initializer.minTriangulated: 10
+
+# minimal parallax (default: 1.0)
+Initializer.minParallax: 1.0
+
+# parallax threshold (default: 0.99998)
+Initializer.parallaxThreshold: 0.99998
+
+# (default: 5.991)
+Initializer.checkHomographyThreshold: 5.991
+
+# (default: 3.841)
+Initializer.checkFundamentalThreshold: 3.841
+
+# (default: 5.991)
+Initializer.checkFundamentalThresholdScore: 5.991
+
+# (default: 0.9)
+Initializer.fundamentalInlierWeight: 0.9
+
+# (default: 0.9)
+Initializer.homographyInlierWeight: 0.9
+
+# (default: 0.7)
+Initializer.fundamentalSimilarityWeight: 0.7
+
+# (default: 0.75)
+Initializer.homographySimilarityWeight: 0.75
+
+
+
+#--------------------------------------------------------------------------------------------
+# Viewer Parameters
+#--------------------------------------------------------------------------------------------
+
+Viewer.KeyFrameSize: 0.1
+Viewer.KeyFrameLineWidth: 1
+Viewer.GraphLineWidth: 1
+Viewer.PointSize: 2
+Viewer.CameraSize: 0.15
+Viewer.CameraLineWidth: 2
+
+Viewer.ViewpointX: -30
+Viewer.ViewpointY: 0
+Viewer.ViewpointZ: 70
+Viewer.ViewpointF: 50001
+
+# show current frame (0: no, 1: yes)
+Viewer.showImage: 1
+
+# size of image view 
+# define just width or height (original aspect ratio won't be changed)
+# if width and height are defined, mean scale factore will be taken
+#Viewer.ImageWidth: 1884
+#Viewer.ImageHeight: 1060
+
+# size of map viewer
+#Viewer.MapViewerWidth: 1920
+#Viewer.MapViewerHeight: 1080
+
+
+Viewer.ImageWidth: 800
+Viewer.ImageHeight: 600
+
+# size of map viewer
+Viewer.MapViewerWidth: 800
+Viewer.MapViewerHeight: 600
+
+
+#--------------------------------------------------------------------------------------------
+# Datatransfer Parameters
+#--------------------------------------------------------------------------------------------
+
+# enable (1) or disable (0) data transfer via UDP socket 
+Data.shouldTransfer: 0
+
+# IP address to connect to for transferring data (default: "127.0.0.1")
+Data.ServerIP: "127.0.0.1"
+Data.Port: 7778

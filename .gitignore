@@ -2,3 +2,4 @@
 Thirdparty/win/DBoW2/build/*
 Thirdparty/win/g2o/build/*
 Thirdparty/win/Pangolin/build/*
+export/*

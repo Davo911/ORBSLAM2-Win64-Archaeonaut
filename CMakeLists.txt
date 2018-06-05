@@ -63,6 +63,10 @@ src/KeyFrameDatabase.cc
 src/Sim3Solver.cc
 src/Initializer.cc
 src/Viewer.cc
+src/Settings.cpp
+src/Log.cpp
+src/CSV.cpp
+src/Color.cpp
 )
 
 target_link_libraries(${PROJECT_NAME}

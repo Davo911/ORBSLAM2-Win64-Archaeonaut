@@ -56,6 +56,7 @@ Frame::Frame(const Frame &frame)
 
     // BOMMEL
     cv::FileStorage fSettings(Settings::path, cv::FileStorage::READ);
+
     //Load Keypoint parameters
     filteringKeypoints =   (0.0   == static_cast<float>(fSettings["Keypoint.Offset.ON"]))       ? true    : false;
     filteringFactor =      (0.0   == static_cast<float>(fSettings["Keypoint.Offset.Factor"]))   ? 0.0     : fSettings["Keypoint.Offset.Factor"];
