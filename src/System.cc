@@ -90,13 +90,16 @@ namespace ORB_SLAM2
         //Create KeyFrame Database
         mpKeyFrameDatabase = new KeyFrameDatabase(*mpVocabulary);
 
+		Log::write(__FUNCTION__, "Create the Map...");
         //Create the Map
         mpMap = new Map();
 
+		Log::write(__FUNCTION__, "Create Drawers...");
         //Create Drawers. These are used by the Viewer
         mpFrameDrawer = new FrameDrawer(mpMap);
         mpMapDrawer = new MapDrawer(mpMap);
 
+		Log::write(__FUNCTION__, "Initialize Tracking thread");
         //Initialize the Tracking thread
         //(it will live in the main thread of execution, the one that called this constructor)
         mpTracker = new Tracking(this, mpVocabulary, mpFrameDrawer, mpMapDrawer,
