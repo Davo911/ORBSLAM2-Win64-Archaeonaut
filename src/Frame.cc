@@ -56,7 +56,6 @@ Frame::Frame(const Frame &frame)
 
     // BOMMEL
     cv::FileStorage fSettings(Settings::path, cv::FileStorage::READ);
-
     //Load Keypoint parameters
     filteringKeypoints =   (0.0   == static_cast<float>(fSettings["Keypoint.Offset.ON"]))       ? true    : false;
     filteringFactor =      (0.0   == static_cast<float>(fSettings["Keypoint.Offset.Factor"]))   ? 0.0     : fSettings["Keypoint.Offset.Factor"];
@@ -213,6 +212,9 @@ Frame::Frame(const cv::Mat &imGray, const double &timeStamp, ORBextractor* extra
 {
     // BOMMEL
     cv::FileStorage fSettings(Settings::path, cv::FileStorage::READ);
+
+	Log::write(__FUNCTION__, "[Load Keypoints]");
+
     //Load Keypoint parameters
     filteringKeypoints =   (0.0   == static_cast<float>(fSettings["Keypoint.Offset.ON"]))       ? true    : false;
     filteringFactor =      (0.0   == static_cast<float>(fSettings["Keypoint.Offset.Factor"]))   ? 0.0     : fSettings["Keypoint.Offset.Factor"];
@@ -233,6 +235,7 @@ Frame::Frame(const cv::Mat &imGray, const double &timeStamp, ORBextractor* extra
     mvLevelSigma2 = mpORBextractorLeft->GetScaleSigmaSquares();
     mvInvLevelSigma2 = mpORBextractorLeft->GetInverseScaleSigmaSquares();
 
+	Log::write(__FUNCTION__, "[Extracting ORB]");
     // ORB extraction
     ExtractORB(0,imGray);
 

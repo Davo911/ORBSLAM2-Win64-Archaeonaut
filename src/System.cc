@@ -36,6 +36,7 @@
 
 void usleep(__int64 usec)
 {
+    /*
 	HANDLE timer;
 	LARGE_INTEGER ft;
 
@@ -45,6 +46,9 @@ void usleep(__int64 usec)
 	SetWaitableTimer(timer, &ft, 0, NULL, NULL, 0);
 	WaitForSingleObject(timer, INFINITE);
 	CloseHandle(timer);
+    */
+
+   std::this_thread::sleep_for(std::chrono::microseconds(usec));
 }
 
 namespace ORB_SLAM2
@@ -65,7 +69,6 @@ namespace ORB_SLAM2
 
         //Load ORB Vocabulary
         Log::write(__FUNCTION__, "Loading ORB Vocabulary.");
-
         const string suffix = ".txt";
         auto index = strVocFile.find(suffix, strVocFile.size() - suffix.size());
         mpVocabulary = new ORBVocabulary();
@@ -77,7 +80,6 @@ namespace ORB_SLAM2
 			      //bVocLoad = mpVocabulary->loadFromTextFile(strVocFile);
 			      bVocLoad = mpVocabulary->loadFromBinaryFile(strVocFile);
         }
-
         if(!bVocLoad) {
             cerr << "Wrong path to vocabulary. " << endl;
             cerr << "Falied to open at: " << strVocFile << endl;
@@ -113,18 +115,20 @@ namespace ORB_SLAM2
         mpLoopCloser = new LoopClosing(mpMap, mpKeyFrameDatabase, mpVocabulary, mSensor!=MONOCULAR);
         mptLoopClosing = new thread(&ORB_SLAM2::LoopClosing::Run, mpLoopCloser);
 
+        Log::write(__FUNCTION__, "Initialize Viewer");
         //Initialize the Viewer thread and launch
-        mpViewer = new Viewer(this, mpFrameDrawer,mpMapDrawer,mpTracker);
+        //mpViewer = new Viewer(this, mpFrameDrawer,mpMapDrawer,mpTracker);
         //#        
         if(bUseViewer) {
-            mpViewer = new Viewer(this, mpFrameDrawer,mpMapDrawer,mpTracker,strSettingsFile);
-            mptViewer = new thread(&Viewer::Run, mpViewer);
-        //#    mpTracker->SetViewer(mpViewer);
+           mpViewer = new Viewer(this, mpFrameDrawer,mpMapDrawer,mpTracker,strSettingsFile);
+           mptViewer = new thread(&Viewer::Run, mpViewer);
+           mpTracker->SetViewer(mpViewer);
         }
         //#
        //# mpDatatransfer = new Datatransfer(this, mpMap, mpTracker);
        //# mptDataTransfer = new std::thread(&ORB_SLAM2::Datatransfer::Run, mpDatatransfer);
 
+        Log::write(__FUNCTION__, "Set pointers between threads");
         //Set pointers between threads
         mpTracker->SetLocalMapper(mpLocalMapper);
         mpTracker->SetLoopClosing(mpLoopCloser);
@@ -134,6 +138,8 @@ namespace ORB_SLAM2
 
         mpLoopCloser->SetTracker(mpTracker);
         mpLoopCloser->SetLocalMapper(mpLocalMapper);
+
+		Log::write(__FUNCTION__, "[SLAM System Established]");
     }
 
     cv::Mat System::TrackStereo(const cv::Mat &imLeft, const cv::Mat &imRight, const double &timestamp)
@@ -302,11 +308,11 @@ namespace ORB_SLAM2
 
         return Tcw;
     }
-
+	
     void System::RunViewer() {
         mpViewer->Run();
     }
-
+	
     void System::ActivateLocalizationMode()
     {
         unique_lock<mutex> lock(mMutexMode);

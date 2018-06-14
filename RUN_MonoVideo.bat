@@ -1,1 +1,1 @@
-.\Examples\Release\mono_video.exe -c=".\data\mondsee_432x240.yaml" -o=".\data\ORBvoc.bin" -f=".\" -v="C:\Users\David\Desktop\MOV_0143_dunkel.mp4"
+.\Examples\Release\mono_video.exe -c=".\data\mondsee_960x540.yaml" -o=".\data\ORBvoc.bin" -f=.\ -v="C:\Users\David\Desktop\GP012691.MP4"

@@ -23,7 +23,7 @@
 #include <pangolin/pangolin.h>
 
 #include <mutex>
-//#include <unistd.h>
+
 #include "opencv2/core.hpp"
 #include "opencv2/videoio.hpp"
 #include "opencv2/opencv.hpp"
@@ -95,6 +95,8 @@ void Viewer::Run() {
     glEnable (GL_BLEND);
     glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+
+/*
     // pangolin::CreatePanel("menu").SetBounds(0.0,1.0,0.0,pangolin::Attach::Pix(175));  //
     // pangolin::Var<bool> menuFollowCamera("menu.Follow Camera",true,true);			   //
 
@@ -137,14 +139,37 @@ void Viewer::Run() {
     bool bFollow = true;
     bool bLocalizationMode = false;
 
+    //pangolin::DisplayBase().RecordOnRender("ffmpeg:[fps=50,bps=243886080,unique_filename]//Map.mp4");
+	//Results in Deadlock
+*/
 
+ pangolin::CreatePanel("menu").SetBounds(0.0,1.0,0.0,pangolin::Attach::Pix(175));
+    pangolin::Var<bool> menuFollowCamera("menu.Follow Camera",true,true);
+    pangolin::Var<bool> menuShowPoints("menu.Show Points",true,true);
+    pangolin::Var<bool> menuShowKeyFrames("menu.Show KeyFrames",true,true);
+    pangolin::Var<bool> menuShowGraph("menu.Show Graph",true,true);
+	pangolin::Var<bool> menuShowKeypoints("menu.Show Keypoints", true, true);
+    pangolin::Var<bool> menuLocalizationMode("menu.Localization Mode",false,true);
+    pangolin::Var<bool> menuReset("menu.Reset",false,false);
 
+    // Define Camera Render Object (for view / scene browsing)
+    pangolin::OpenGlRenderState s_cam(
+                pangolin::ProjectionMatrix(1024,768,mViewpointF,mViewpointF,512,389,0.1,1000),
+                pangolin::ModelViewLookAt(mViewpointX,mViewpointY,mViewpointZ, 0,0,0,0.0,-1.0, 0.0)
+                );
 
+    // Add named OpenGL viewport to window and provide 3D Handler
+    pangolin::View& d_cam = pangolin::CreateDisplay()
+            .SetBounds(0.0, 1.0, pangolin::Attach::Pix(175), 1.0, -1024.0f/768.0f)
+            .SetHandler(new pangolin::Handler3D(s_cam));
 
+    pangolin::OpenGlMatrix Twc;
+    Twc.SetIdentity();
 
+    cv::namedWindow("ORB-SLAM2: Current Frame");
 
-    pangolin::DisplayBase().RecordOnRender("ffmpeg:[fps=50,bps=243886080,unique_filename]//Map.mp4");
-
+    bool bFollow = true;
+    bool bLocalizationMode = false;
 
     while(1)
     {
@@ -188,20 +213,20 @@ void Viewer::Run() {
             mpMapDrawer->DrawMapPoints();
         
         pangolin::FinishFrame();
+
         mShowImage = 1;
         if (mShowImage) {
             cv::Mat im = mpFrameDrawer->DrawFrame(mImageWidth, mImageHeight, menuShowKeypoints);
             auto winName = "ORB-SLAM2: Current Frame";
-            
-           
+
 
             videoKey << im;
             cv::imshow(winName, im);
             
 
 
-            
-            cv::moveWindow(winName, mImagePosX, mImagePosY);
+            // Wofür Fenster-pos sperren?
+            //cv::moveWindow(winName, mImagePosX, mImagePosY);
             cv::waitKey(mT);
            //videoKey.release();
 
