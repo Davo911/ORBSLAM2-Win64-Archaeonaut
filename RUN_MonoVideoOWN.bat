@@ -1,0 +1,1 @@
+.\Examples\Release\mono_video.exe -c=".\Examples\Monocular\TUM1.yaml" -o=".\data\ORBvoc.bin" -f=".\output\OWN" -v="C:\Users\David\Desktop\MOV_0144_hell.MP4"

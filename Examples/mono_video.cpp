@@ -228,6 +228,7 @@ int processSLAM(T input, System *slamPtr, int start, int end, int skipInit, int 
     SLAM.Shutdown();
 	Log::write(__FUNCTION__, "[SLAM System Shutted Down]");
 
+    //Save resulting Map and track data
     auto resultMap = async(launch::async, &System::SaveMapOBJ, &SLAM, exportPath + "map.obj");
     auto resultTrack = async(launch::async, &System::SaveKeyFrameTrajectoryOBJ, &SLAM, exportPath + "track.obj");
     auto resultTrack2 = async(launch::async, &System::SaveKeyFrameTrajectoryCSV, &SLAM, exportPath + "track.csv");

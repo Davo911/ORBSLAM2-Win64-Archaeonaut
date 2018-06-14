@@ -5,3 +5,8 @@ Thirdparty/win/Pangolin/build/*
 export/*
 Key.mkv
 test.log
+map.obj
+KeyFrameTrajectory.txt
+track.obj
+track.csv
+*Trajectory.txt
