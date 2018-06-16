@@ -10,3 +10,4 @@ KeyFrameTrajectory.txt
 track.obj
 track.csv
 *Trajectory.txt
+/output/*
