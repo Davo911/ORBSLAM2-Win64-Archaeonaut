@@ -28,6 +28,7 @@
 #include "opencv2/videoio.hpp"
 #include "opencv2/opencv.hpp"
 #include "opencv2/imgcodecs.hpp"
+#include <chrono>
 namespace ORB_SLAM2
 {
 
@@ -131,9 +132,23 @@ void Viewer::Run() {
     //Recording the MapViewer
     //pangolin::DisplayBase().RecordOnRender("ffmpeg:[fps=50,bps=243886080,unique_filename]//Map.mp4");
 	        //Results in Deadlock
+   
 
+    int countpix = 0;
+    auto last = std::chrono::steady_clock::now();
+	string fname = "./tmp/map";
     while(1)
     {
+        //save every frame of MapViewer seperate
+		std::chrono::steady_clock::duration time_span = std::chrono::steady_clock::now() - last;
+		double nseconds = double(time_span.count()) * std::chrono::steady_clock::period::num / std::chrono::steady_clock::period::den;
+        if(nseconds >= (1/30)){
+			
+            last = std::chrono::steady_clock::now();
+            d_cam.SaveOnRender(fname + std::to_string(countpix));
+			countpix++;
+        }
+   
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         mpMapDrawer->GetCurrentOpenGLCameraMatrix(Twc);
@@ -222,6 +237,9 @@ void Viewer::Run() {
 
             break;
             }
+
+            
+
     }
 
     SetFinish();
