@@ -5,6 +5,7 @@ See https://github.com/raulmur/ORB_SLAM2 for the Original
  Built using CMAKE GUI 3.11 + OpenCV 3.4.1 + Visual Studio 2017 on Windows 10 x64
  
  **Required:**
+ Git
  CMake
  OpenCV :  https://github.com/opencv/opencv/releases
  +contrib: https://github.com/opencv/opencv_contrib/releases
@@ -31,5 +32,11 @@ See https://github.com/raulmur/ORB_SLAM2 for the Original
 5. Examples
 - C/C++ Tab -> Code Generation :  Runtime Library to Multi-threaded (/MT)
 build
+
+6. Openh264
+- Download "libopenh264-1.7.0-win64.dll"
+- Move to System32
+OR
+-put it in System PATH
 _________________________________________________________________________________________
 -added Binary Support
