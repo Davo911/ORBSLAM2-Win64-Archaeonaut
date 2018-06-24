@@ -2,12 +2,12 @@
 See https://github.com/raulmur/ORB_SLAM2 for the Original
 
 
- Built using CMAKE GUI 3.11 + OpenCV 3.4.1 + Visual Studio 2017 on Windows 10 x64
+Tested using CMAKE GUI 3.11 + OpenCV 3.4.1 + Visual Studio 2017 on Windows 10 Pro x64
  
  **Required:**
  Git
  CMake
- OpenCV :  https://github.com/opencv/opencv/releases
+ OpenCV :  https://github.com/opencv/opencv/releases OR Thirdparty Folder 
  +contrib: https://github.com/opencv/opencv_contrib/releases
  Openh264: https://github.com/cisco/openh264/releases
 1. DBoW2 --- Config/Generate
