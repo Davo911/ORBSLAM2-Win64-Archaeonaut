@@ -133,7 +133,6 @@ void Viewer::Run() {
     //pangolin::DisplayBase().RecordOnRender("ffmpeg:[fps=50,bps=243886080,unique_filename]//Map.mp4");
 	        //Results in Deadlock
    
-
     int countpix = 0;
     auto last = std::chrono::steady_clock::now();
 	string fname = "./tmp/map";
@@ -187,7 +186,7 @@ void Viewer::Run() {
             mpMapDrawer->DrawKeyFrames(menuShowKeyFrames,menuShowGraph);
         if(menuShowPoints)
             mpMapDrawer->DrawMapPoints();
-        
+
         pangolin::FinishFrame();
 
         mShowImage = 1;

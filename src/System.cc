@@ -33,23 +33,27 @@
 
 
 
-
+#ifdef _WIN32
 void usleep(__int64 usec)
 {
-    /*
-	HANDLE timer;
-	LARGE_INTEGER ft;
+     #if __cplusplus <= 199711L
+        HANDLE timer;
+        LARGE_INTEGER ft;
 
-	ft.QuadPart = -(10 * usec); // Convert to 100 nanosecond interval, negative value indicates relative time
+        ft.QuadPart = -(10 * usec); // Convert to 100 nanosecond interval, negative value indicates relative time
 
-	timer = CreateWaitableTimer(NULL, TRUE, NULL);
-	SetWaitableTimer(timer, &ft, 0, NULL, NULL, 0);
-	WaitForSingleObject(timer, INFINITE);
-	CloseHandle(timer);
-    */
+        timer = CreateWaitableTimer(NULL, TRUE, NULL);
+        SetWaitableTimer(timer, &ft, 0, NULL, NULL, 0);
+        WaitForSingleObject(timer, INFINITE);
+        CloseHandle(timer);
+     #else
+        std::this_thread::sleep_for(std::chrono::microseconds(usec));
+    #endif
 
-   std::this_thread::sleep_for(std::chrono::microseconds(usec));
+
+   
 }
+#endif
 
 namespace ORB_SLAM2
 {
